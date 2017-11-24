@@ -13,10 +13,10 @@
 		<div class="login_content login_main">
 			<group>
 				<x-input title="姓名" placeholder="请输入手机号码" :show-clear="false" placeholder-align="left" is-type="china-mobile" v-model="params.phone">
-					<img slot="label" style="padding-left:.2rem;padding-right:.6rem;display:block;width: .4rem;height:.7rem;" src="../../src/assets/img/login/cellphone_icon.png"/>
+					<img slot="label" style="padding-left:.2rem;padding-right:.6rem;display:block;width: .4rem;height:.7rem;" src="http://i4.cfimg.com/611341/e44c41182b8e7e1a.png"/>
 				</x-input>
-				<x-input title="姓名" placeholder="请输入密码" :show-clear="false" placeholder-align="left" v-model="params.pwd">
-					<img slot="label" style="padding-left:.2rem;padding-right:.6rem;display:block;width: .4rem;height:.5rem;" src="../../src/assets/img/login/verification code_icon.png"/>
+				<x-input title="姓名" placeholder="请输入密码" type="password" :show-clear="false" placeholder-align="left" v-model="params.pwd">
+					<img slot="label" style="padding-left:.2rem;padding-right:.6rem;display:block;width: .4rem;height:.5rem;" src="http://i4.cfimg.com/611341/3802563e344bc5f9.png"/>
 				</x-input>
 			</group>
 			<!--<ul class="login_option">
@@ -35,7 +35,9 @@
 			</ul>-->
 			<div class="set_option">
 				<span>
-					忘记密码?
+					<router-link to="/Findpwd">
+						忘记密码?
+					</router-link>
 				</span>
 				<span>
 					<router-link to="/Zhuce">
@@ -61,13 +63,14 @@
 				<img src="../../src/assets/img/photo/wx.svg" style="display:block;width:.5rem;height:.5rem;margin:0 1em 0 1rem;"/>
 				<img src="../../src/assets/img/photo/wb.svg" style="display:block;width:.5rem;height:.5rem;"/>
 			</div>
+			<toast v-model="showPositionValue" type="text" :time="800" is-show-mask position="middle" width="2rem">{{toasttitle}}</toast>
 		</div>	
   	</div>
   	
 </template>
 
 <script>
-import { XHeader, GroupTitle, XButton, Divider, Grid, GridItem, Tabbar, TabbarItem, Group, Cell, XInput, Tab, TabItem, Swiper, SwiperItem } from 'vux'
+import { XHeader, GroupTitle, XButton, Divider, Grid, GridItem, Group, Cell, XInput, Toast } from 'vux'
 import {api} from '../utils'
 export default {
   components: {
@@ -76,16 +79,11 @@ export default {
     Divider,
     Grid,
     GridItem,
-    Tabbar,
-    TabbarItem,
     Group,
     Cell,
     XHeader,
     XInput,
-    Tab,
-    TabItem,
-    Swiper,
-    SwiperItem
+    Toast
   },
   data () {
     return {
@@ -94,7 +92,9 @@ export default {
     		phone:'',
     		pwd:''
     	},
-    	obj:{'name':"rth"}
+    	obj:{'name':"rth"},
+    	toasttitle:"此处不能为空",
+    	showPositionValue:false
     }
   },
   methods: {
@@ -103,12 +103,23 @@ export default {
   		
   	},
   	loginbtnfn () {
+  		if(this.params.phone==""){
+  			this.showPositionValue=true;
+  			this.toasttitle="手机号码不能为空";
+  			return;
+  		}
+  		if(this.params.pwd==""){
+  			this.showPositionValue=true;
+  			this.toasttitle="密码不能为空";
+  			return;
+  		}
+  		
   		api('/service/signin', {}, callback => {
-				var result=callback.data.result;
+	  		var result=callback.data.result;
 	  		if(result){
-	  			console.log(this.$route);
+	  			this.$router.push({path:"/"});
 	  		}
-			})
+		})
   		/*if(this.params.phone==""){
   			return;
   		}
@@ -144,12 +155,18 @@ export default {
 .login_header{
 	width:100%;
 	height:4rem;
-	background:url('../../src/assets/img/login/banner.png') no-repeat;
+	background:url('http://i4.cfimg.com/611341/6342d711ae479079.png') no-repeat;
 	background-size:cover;
 	position:relative;
 }
+.login_wrap .vux-header{
+	background:none  !important;
+}
 .login_wrap .vux-header .vux-header-back{
 	color:#000 !important;
+}
+.login_wrap .vux-header .vux-header-left .left-arrow:before{
+	border-color:#414141 !important;
 }
 div.smallheader{
 	position:absolute;
@@ -218,9 +235,9 @@ div.login_bottomthreelogo{
 .login_wrap .weui-input{
 	font-size: .23rem !important;
 }
-span.backhome a{
-	padding-left:.2rem;
-	color:#000 !important;
+.login_wrap span.backhome a{
+	padding-left:.4rem;
+	color:#414141 !important;
 }
 .login_wrap .weui-cell{
 	padding:.6rem .2rem;

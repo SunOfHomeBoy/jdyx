@@ -1,7 +1,7 @@
 <template>
 	<div class="rzdw_wrap"><!--兼职-->
 		<div class="rzdw_content rzdw_header">
-			<x-header title="入职定位" :left-options="{showBack: false}"><a slot="right" @click="savefn">保存</a></x-header>
+			<x-header title="入职定位" :left-options="{showBack: true,backText: ''}"><a slot="right" @click="savefn">保存</a></x-header>
 		</div>
 		<div class="rzdw_content rzdw_main">
 			<dl class="sztx_a">
@@ -270,23 +270,7 @@ div.rzdw_allinputs{
 .rzdw_wrap .weui-dialog{
 	top:100.8% !important;
 }
-.dialog_topcontent{
-	background:#fff;
-}
-.dialog_topcontent li{
-	height:3.5rem;
-	text-align: left;
-	line-height:3.5rem;
-	padding-left:2rem;
-}
-.dialog_topcontent li:not(:last-child){
-	border-bottom:1px solid #E7E7E7;
-}
-.dialog_topcontent li.active{
-	color:#2A7DAD;
-	background:url('../../src/assets/img/photo/checked.svg') no-repeat 95% 1rem;
-	background-size:5%;
-}
+
 .weui-label{
 	font-size:1.5rem !important;
 	color:#000 !important;
@@ -344,7 +328,7 @@ div.rzdw_allinputs{
 .rzdw_options>span.ro_value input{
 	width:100%;
 	outline: none;
-	height:1rem;
+	height:.98rem;
 	bordeR:0;
 	font-size:.3rem;
 	padding-right: .3rem;

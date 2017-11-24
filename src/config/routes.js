@@ -38,62 +38,52 @@ const Importmoney = resolve => require(['../components/Importmoney'], resolve)
 const Login = resolve => require(['../components/Login'], resolve)
 const Zhuce = resolve => require(['../components/Zhuce'], resolve)
 const Evaluatexq = resolve => require(['../components/Evaluatexq'], resolve)
+const Findpwd = resolve => require(['../components/Findpwd'], resolve)
 export default [{
 	path: '/',
 	component: App,
-	children: [
-		{
+	children: [{
 			path: '/',
 			component: Home
-		}, 
-		{
+		}, {
 			path: '/Rcss',
 			component: ChildWrapper,
-			children:[
-				{
+			children:[{
 					path:'',
 					component:Rcss
-				},
-				{
-					path:'Rcssxq',
+				},{
+					path:'Rcssxq/:id',
+					name:"Rcssxq",
 					component: Rcssxq
 				}
 			]
-		},
-		{
+		},{
 			path: '/Rcgx',
 			component: ChildWrapper,
 			/*meta: {auth:true}*/
-			children:[
-				{
+			children:[{
 				path:'',
 					component:Rcgx
-				},
-				{
+				},{
 					path:'Rcgxxq/:id',
 					name:'Rcgxxq',
 					component: Rcgxxq
-				},
-				{
+				},{
 					path: 'Evaluatexq/:id',
 					name:'Evaluatexq',
 					component: Evaluatexq
 				}
 			]
-		},
-		{
+		},{
 			path: '/Rzdw',
 			component: Rzdw
-		},
-		{
+		}, {
 			path: '/Rzdw2',
 			component: Rzdw2
-		}, 
-		{
+		}, {
 			path: '/Myself',
 			component: ChildWrapper,
-			children: [
-				{
+			children: [{
 					path: '',
 					component: Myself,
 					meta: {auth:true}
@@ -105,30 +95,24 @@ export default [{
 						{
 							path: '',
 							component: Accountmsg
-						},
-						{
+						},{
 							path: 'Recharge',
 							component: Recharge
-						},
-						{
+						},{
 							path: 'Importmoney',
 							component: Importmoney
-						},
-						{
+						},{
 							path: 'Rechargerecord',
 							component: Rechargerecord
 						}
 					]
-				},
-				{
+				},{
 					path: 'Myfavourite',
 					component: Myfavourite
-				},
-				{
+				},{
 					path: 'personaldata',
 					component: Personaldata
-				},
-				{
+				},{
 					path: 'Sz',
 					component: Szchild,
 					children: [
@@ -143,28 +127,23 @@ export default [{
 						{
 							path: 'Help',
 							component: Help
-						},
-						{
+						},{
 							path: 'Editpwd',
 							component: Editpwd
-						},
-						{
+						},{
 							path: 'Banbenteam',
 							component: Banbenteam
 						}
 					]
-				},
-				{
+				},{
 					path: 'Hadview',
 					component: Hadview
-				},
-				{
+				},{
 					path: 'Byview',
 					component: Byview
 				}
 			]
-		}, 
-		{
+		}, {
 			path: '/Teamzj',
 			component: Szchild,
 			children:[
@@ -177,43 +156,37 @@ export default [{
 					component: Zjrecord
 				}
 			]
-		}, 
-		{
+		}, {
 			path: '/Jdtt',
 			component: Jdtt
-		}, 
-		{
+		}, {
 			path: '/Zspx',
 			component: Zspx
-		}, 
-		{
+		}, {
 			path: '/Zspxxq/:id',
 			name: 'Zspxxq',
 			component: Zspxxq
-		},
-		{
+		},{
 			path: '/Evaluate',
 			component: Evaluate
-		},
-		{
+		},{
 			path: '/Selcity',
 			component: Selcity
-		},
-		{
+		},{
 			path: '/Editresume',
 			component: Editresume
-		},
-		{
+		},{
 			path: '/Selectbeforeresume',
 			component: Selectbeforeresume
-		},
-		{
+		},{
 			path: '/Login',
 			component: Login
-		},
-		{
+		},{
 			path: '/Zhuce',
 			component: Zhuce
+		},{
+			path: '/Findpwd',
+			component: Findpwd
 		}
 	]
 }]

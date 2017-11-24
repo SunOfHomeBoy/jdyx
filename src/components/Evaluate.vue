@@ -1,11 +1,11 @@
 <template>
 	<div class="evaluate_wrap">
 		<div class="evaluate_content evaluate_header">
-			<x-header :left-options="{showBack:true,backText: ''}">我要评价<a slot="right">发表</a></x-header>
+			<x-header :left-options="{showBack:true,backText: ''}">我要评价<a slot="right">提交</a></x-header>
 		</div>
 		<div class="evaluate_content evaluate_main" style="width:95%;margin:auto;margin-top:.4rem;">
 			<group>
-				<x-textarea :placeholder="$t('对于京典一线的评价')" :show-counter="false" :rows="1" autosize></x-textarea>
+				<x-textarea :placeholder="$t('对于京典一线的评价')" :show-counter="false" :rows="1" :height="200"></x-textarea>
 			</group>
 		</div>	
   	</div>

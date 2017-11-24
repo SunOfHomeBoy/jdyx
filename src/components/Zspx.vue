@@ -6,7 +6,7 @@
 		<div class="zspx_content zspx_main">
 			<div class="zspx_main_tab">
 				<div class="header">
-					<scroller lock-y :scrollbar-x=false>
+					<!--<scroller lock-y :scrollbar-x=false>
 						<div class="box1">
 				        	<template v-for="(it,index) in tabs">
 								<div :class="['box1-item',{active:isactive==index}]" @click="clicktabsFn(index)">
@@ -14,14 +14,14 @@
 								</div>
 							</template>
 				        </div>
-					</scroller>
-					<!--<div class="f-hideScrollBar f-toh">
+					</scroller>-->
+					<div class="f-hideScrollBar f-toh">
 						<template v-for="(it,index) in tabs">
 							<div :class="['item',{active:isactive==index}]" @click="clicktabsFn(index)">
 								{{it.name}}
 							</div>
 						</template>
-					</div>-->
+					</div>
 				</div>
 			</div>
 			<div class="zspx_main_contains">
@@ -102,7 +102,7 @@ export default {
     return {
     	index: 0,
     	isactive: 0,
-    	tabs: [{name:'职场建议'},{name:'考试认证'},{name:'互联网'},{name:'兴趣特征'}],
+    	tabs: [{name:'职场建议'},{name:'考试认证'},{name:'互联网'},{name:'兴趣特征'},{name:'兴趣爱好'}],
     	zspx_contents:[],//存储知识培训列表内容
     	onFetching: false,
     	pageparam:{index:1,limit:10},
@@ -253,7 +253,7 @@ div.zspx_main_contains_img img{
 header,div{
 	box-sizing: border-box;
 }
-.header{
+/*.header{
 	width: 100%;
 	height: 50px;
 	background-color: #fff;
@@ -280,8 +280,8 @@ header,div{
 }
 .box1-item:first-child {
   margin-left: 0;
-}
-	/*.f-toh{
+}*/
+	.f-toh{
 		overflow: scroll;
 		white-space: nowrap;
 		-webkit-overflow-scrolling: touch;
@@ -307,6 +307,7 @@ header,div{
 		width: 25%;
 		height: 100%;
 		color: #AFAFAF;
+		font-size:0.23rem;
 		line-height: 50px;
 		text-align: center;
 		text-transform: uppercase;
@@ -314,7 +315,7 @@ header,div{
 	.header .item.active{
 	
 		color: #414141;
-	}*/
+	}
 	/*.header .item:not(:last-child){
 		border-right: 1px solid rgba(0,0,0,.2);
 	}*/

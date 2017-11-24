@@ -4,7 +4,7 @@
 			<x-header :left-options="{showBack:true,backText:''}">
 				<span style="block;float:left;margin-left:25%;">我的收藏</span>
 			    <span style="display:block;float:left;position:relative;">
-			   	  <img src="../../src/assets/img/photo/jt_top_white.svg" style="margin-top:0.23rem;" :class="{imgrotatetop:showDialogStyle}"/>
+			   	  <img src="http://i1.cfimg.com/611341/071b63d3b0b4c50e.png" style="margin-top:0.25rem;margin-left:.1rem;" :class="{imgrotatetop:showDialogStyle}"/>
 			   	  <input type="checkbox" v-model="showDialogStyle" style="position:absolute;left:0;top:0;width:100%;height:100%;opacity:0;" />
 			    </span>
 			</x-header>

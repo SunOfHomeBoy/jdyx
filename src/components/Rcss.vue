@@ -1,26 +1,27 @@
 <template>
 	<div class="rcss_wrap">
+		<loading :show="isLoading" position="absolute" text="加载中"></loading>
 		<div class="rcss_content rcss_header">
-			<x-header title="人才搜索" :left-options="leftcontent"><a slot="right"><img src="../../src/assets/img/login/seek2_icon.png" style="width:.4rem;height:.4rem;"/></a></x-header>
+			<x-header title="人才搜索" :left-options="leftcontent"><a slot="right"><img src="http://i4.cfimg.com/611341/406f3ecc5960fa87.png" style="width:.4rem;height:.4rem;" @userevent="getVal"/></a></x-header>
 			<div class="rcss_choices">
 				<ul>
 					<li>
-						<span style="position:relative;">
-							<em style="padding-right:.2rem;">学历</em><img src="../../src/assets/img/photo/jt_top.svg" style="width:.2rem;height:.25rem;" :class="{imgrotatetop:showeducationdialog}"/>
-							<input type="checkbox" style="position:absolute;top;0;left:0;width:100%;height:100%;opacity:0;" v-model="showeducationdialog" @click="educationfn"/>
+						<span :class="{defaultimg:!showeducationdialog,imgrotatetop:showeducationdialog}">
+							<em style="padding-right:.2rem;">学历</em><a></a>
+							<input type="checkbox" class="hideinput" v-model="showeducationdialog" @click="educationfn"/>
 						</span>
 					</li>
 					<li>
-						<span style="position:relative;">
-							<em style="padding-right:.2rem;">工作经验</em><img src="../../src/assets/img/photo/jt_top.svg" style="width:.2rem;height:.25rem;" :class="{imgrotatetop:showexperiencedialog}"/>
-							<input type="checkbox" style="position:absolute;top;0;left:0;width:100%;height:100%;opacity:0;" v-model="showexperiencedialog" @click="experiencefn"/>
+						<span :class="{defaultimg:!showexperiencedialog,imgrotatetop:showexperiencedialog}">
+							<em style="padding-right:.2rem;">工作经验</em><a></a>
+							<input type="checkbox" class="hideinput" v-model="showexperiencedialog" @click="experiencefn"/>
 						</span>
 						
 					</li>
 					<li>
-						<span style="position:relative;">
-							<em style="padding-right:.2rem;">全部职位</em><img src="../../src/assets/img/photo/jt_top.svg" style="width:.2rem;height:.25rem;" :class="{imgrotatetop:showzhiweidialog}"/>
-							<input type="checkbox" style="position:absolute;top;0;left:0;width:100%;height:100%;opacity:0;" v-model="showzhiweidialog" @click="zhiweifn"/>
+						<span :class="{defaultimgmore:!showzhiweidialog,imgrotatetopmore:showzhiweidialog}">
+							<em style="padding-right:.2rem;">全部职位</em><a style="height:.23rem;"></a>
+							<input type="checkbox" class="hideinput" v-model="showzhiweidialog" @click="zhiweifn"/>
 						</span>
 					</li>
 				</ul>
@@ -43,7 +44,7 @@
 									<p>薪资 ： {{item.pay}}</p>
 								</div>
 								<div class="rcss_alloptions_jt">
-									<router-link to="/Rcss/Rcssxq"><img src="../../src/assets/img/photo/right_jt.svg" style="display:block;"/></router-link>
+									<router-link :to="{name:'Rcssxq',params:{id:1001,name:'121'}}"><img src="../../src/assets/img/photo/right_jt.svg" style="display:block;"/></router-link>
 								</div>
 							</li>
 						</template>
@@ -71,14 +72,8 @@
 	        	<scroller lock-x height="9rem">
 	        		<div class="select_content">
 	        			<template v-for="(item,index) in alljobs">
-	        				<div style="font-size:0.25rem;display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:.2rem;"><span>{{item.title}}</span><span><img src="../../src/assets/img/photo/jt_bottom.svg" style="width:.3rem;height:.3rem;"/></span></div>
+	        				<div class="title"><span>{{item.title}}</span><span><img src="../../src/assets/img/photo/jt_bottom.svg" style="width:.3rem;height:.3rem;"/></span></div>
 							<ul>
-								<!--<template v-for="(children , c_index) in item.children">
-									<li :data-index="children.id">
-										<span>{{children.name}}</span>
-										<input type="checkbox" class="selcheck" :value="children.id" v-model="selectedjobs">
-									</li>
-								</template>-->
 								<checker
 								    v-model="selectedjobs"
 								    type="checkbox"
@@ -98,11 +93,12 @@
 				</div>
 			</div>
 	    </div>
+	   
   	</div>
 </template>
 
 <script>
-import { XHeader, GroupTitle, XButton, Scroller, Checker, CheckerItem, LoadMore } from 'vux'
+import { XHeader, GroupTitle, XButton, Scroller, Checker, CheckerItem, LoadMore, Loading } from 'vux'
 import {api} from '../utils'
 import PullTo from 'vue-pull-to'
 export default {
@@ -114,17 +110,17 @@ export default {
     Checker,
     CheckerItem,
     LoadMore,
-    PullTo
+    PullTo,
+    Loading
   },
   created () {
   	this.alljobs=jdyxData.rcssalljobs;
   	let condition=this.pageParams;
   	api('/search/listResume', condition, callback => {
-	  		var data=callback.data.items;
-	  		this.rcssdata=data;
+		this.isLoading=false;
+  		var data=callback.data.items;
+  		this.rcssdata=data;
 	})
-  },
-  ready () {
   },
   methods: {
     onSwiperItemIndexChange (index) {
@@ -217,7 +213,11 @@ export default {
 		  	this.rcssdata=data;
 		  	loaded('done');
 		})
+    },
+    getVal (msg) {
+    	console.log("-=-=",msg)
     }
+   
   },
   data () {
     return {
@@ -234,7 +234,8 @@ export default {
       selectedjobs:[],//用户选择的职位
       searchparams:{"education":0,"workYears":0,"alljob":" "},
       pageParams:{begins:1,limit:20},//分页条件
-      showloadmore:false
+      showloadmore:false,
+      isLoading:true,
     }
   },
   computed: {
@@ -244,8 +245,10 @@ export default {
   		}else{
   			return false;
   		}
-   	}
-	}
+   	},
+   
+  }
+  
 }
 </script>
 
@@ -296,6 +299,7 @@ div.rcss_choices>ul li{
 }
 div.rcss_choices>ul li span{
 	height:.5rem;
+	position:relative;
 }
 div.rcss_choices>ul li:nth-child(2) span{
 	border-left:1px solid #cacaca;
@@ -337,8 +341,8 @@ div.rcss_choices .jt_x{
 }
 .rcss_alloptions li div.rcss_alloptions_img>img{
 	display: block;
-	width:1.2rem;
-	height:1.2rem;
+	width:1.1rem;
+	height:1.1rem;
 	
 }
 .rcss_alloptions li div.rcss_alloptions_text{
@@ -401,6 +405,14 @@ div.rcss_choices .jt_x{
 }
 .select_content{
 	overflow:auto;
+}
+.select_content .title{
+	font-size:0.25rem;
+	display:flex;
+	flex-direction:row;
+	justify-content:space-between;
+	align-items:center;
+	padding:.2rem;
 }
 .select_content ul{
 	display:flex;
@@ -513,7 +525,30 @@ div.resetok span:nth-child(2){
 		height:10rem
 	}
 }
-.imgrotatetop{
+.rcss_choices a{
+	display:inline-block;
+	width:.25rem;
+	height:.2rem;
+}
+span.defaultimg a{
+	background:url("http://i4.cfimg.com/611341/72bdb9ffd32c8ed2.png");
+}
+span.imgrotatetop a{
+	background:url("http://i4.cfimg.com/611341/818308d6f045382c.png");
+}
+div.rcss_choices>ul span.imgrotatetop em{
+	color:#2A7DAD;
+}
+span.defaultimgmore a{
+	background:url("http://i2.cfimg.com/611341/0c98d477280e8680.png");
+}
+span.imgrotatetopmore a{
+	background:url("http://i2.cfimg.com/611341/9fb5e3e9dad03180.png");
+}
+div.rcss_choices>ul span.imgrotatetopmore em{
+	color:#2A7DAD;
+}
+/*.imgrotatetop{
 	animation:showrotatetop .3s forwards;
 }
 @-webkit-keyframes showrotatetop{
@@ -523,20 +558,18 @@ div.resetok span:nth-child(2){
 	100%{
 		transform:rotate(180deg)
 	}
-}
-.imgrotatebottom{
-	animation:showrotatebottom .3s forwards;
-}
-@-webkit-keyframes showrotatebottom{
-	0%{
-		transform:rotate(180deg)
-	}
-	100%{
-		transform:rotate(0deg)
-	}
-}
+}*/
+
 .selcheck{
 	width:100%;
 	height:100%;
+}
+.hideinput{
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	opacity:0;
 }
 </style>

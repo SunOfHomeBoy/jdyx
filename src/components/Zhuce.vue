@@ -5,18 +5,18 @@
 		</div>
 	    <div class="zc_main">
 	    	<group>
-				<x-input title="姓名" placeholder="请输入手机号码" :show-clear="false" placeholder-align="left" is-type="china-mobile">
-					<img slot="label" style="padding-left:.2rem;padding-right:.4rem;display:block;width:.4rem;height:.8rem;" src="../../src/assets/img/login/cellphone_icon.png"/>
+				<x-input title="姓名" placeholder="请输入手机号码" :show-clear="false" placeholder-align="left" is-type="china-mobile" v-model="params.mobile">
+					<img slot="label" style="padding-left:.2rem;padding-right:.4rem;display:block;width:.4rem;height:.8rem;" src="http://i4.cfimg.com/611341/e44c41182b8e7e1a.png"/>
 				</x-input>
-				<x-input title="姓名" placeholder="请输入验证码" :show-clear="false" placeholder-align="left">
-					<img slot="label" style="padding-left:.2rem;padding-right:.4rem;display:block;width: .4rem;height:.5rem;" src="../../src/assets/img/login/verification code_icon.png"/>
+				<x-input title="姓名" placeholder="请输入验证码" :show-clear="false" placeholder-align="left" v-model="params.captcha">
+					<img slot="label" style="padding-left:.2rem;padding-right:.4rem;display:block;width: .4rem;height:.5rem;" src="http://i4.cfimg.com/611341/9bcad1fdbefcbbe4.png"/>
 					<a slot="right" style="color:#2a7dad;font-size:0.23rem;padding-right:0.2rem;">获取验证码</a>
 				</x-input>
-				<x-input title="姓名" placeholder="请输入您的密码（6-16位）" :show-clear="false" placeholder-align="left" :min="6" :max="16" v-model="password">
-					<img slot="label" style="padding-left:.2rem;padding-right:.4rem;display:block;width: .4rem;height:.5rem;" src="../../src/assets/img/login/correct password_icon.png"/>
+				<x-input title="姓名" placeholder="请输入您的密码（6-16位）" type="password" :show-clear="false" placeholder-align="left" :min="6" :max="16" v-model="params.password">
+					<img slot="label" style="padding-left:.2rem;padding-right:.4rem;display:block;width: .4rem;height:.5rem;" src="http://i4.cfimg.com/611341/6eceb837125e00db.png"/>
 				</x-input>
-				<x-input title="姓名" placeholder="请确认您的密码" :show-clear="false" placeholder-align="left" v-model="password2"  :equal-with="password">
-					<img slot="label" style="padding-left:.2rem;padding-right:.4rem;display:block;width: .4rem;height:.5rem;" src="../../src/assets/img/login/confirm password_icon.png"/>
+				<x-input title="姓名" placeholder="请确认您的密码" type="password" :show-clear="false" placeholder-align="left" :equal-with="password" v-model="params.confirm">
+					<img slot="label" style="padding-left:.2rem;padding-right:.4rem;display:block;width: .4rem;height:.5rem;" src="http://i4.cfimg.com/611341/94a8031fe476d419.png"/>
 				</x-input>
 			</group>
 			<div style="margin-top:.5rem;height:.4rem;">
@@ -32,7 +32,7 @@
 				
 			</div>
 	    </div> 
-	    <div style="width:75%;margin:auto;margin-top:2.6rem;">
+	    <div style="width:75%;margin:auto;margin-top:2.6rem;" @click="signupfn">
 	    	<x-button type="primary" text="注册"></x-button>
 	    </div>
     </div>
@@ -40,6 +40,7 @@
 
 <script>
 import { XHeader, GroupTitle, XButton, Divider, Grid, GridItem, Tabbar, TabbarItem, Group, Cell, XInput, Checker, CheckerItem } from 'vux'
+import {api} from '../utils'
 export default {
   components: {
     GroupTitle,
@@ -61,13 +62,31 @@ export default {
   methods: {
     onSwiperItemIndexChange (index) {
       console.log('demo item change', index)
+    },
+    signupfn () {
+    	
+    	api('/service/signup', this.params, callback => {
+	  		var result=callback.data.result;
+	  		if(result){
+	  			this.$router.push({path:"/"});
+	  		}
+		})
     }
   },
   data () {
     return {
-      password2: '',
-      password: '',
-      commonList:['']
+      params:{
+      	registerType:"Person",
+      	mobileArea:"86",
+      	mobile:"",
+      	password:"",
+      	confirm:"",
+      	captcha:"",
+      	encrypt:"XXXXXX",
+      	enterpriseType: 1,
+      	enterpriseName:"京典一线网络技术（北京）有限公司",
+      	username:"hr"
+      }
     }
   }
 }
@@ -149,7 +168,7 @@ export default {
 	left:-999999rem;
 }
 .mycheck input:checked+i{
-	background:url('../../src/assets/img/login/consent_icon.png') no-repeat;
+	background:url('http://i4.cfimg.com/611341/f3dfc674dcb418bd.png') no-repeat;
 	background-size: 100%;
 	border:1px solid #fff;
 }

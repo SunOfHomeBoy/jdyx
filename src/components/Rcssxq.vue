@@ -1,17 +1,18 @@
-
 <template>
 	<div class="rcssxq_wrap">
-		<div class="rcssxq_content">
+		<x-header title="菲菲" :left-options="{showBack:true,backText:''}" style="position:absolute;left:0;top:0;width:100%;background:none;" ref="myheader"><a slot="right" @click="morefn">更多</a></x-header>
+		<scroller lock-x :bounce=false @on-scroll="onScrollfn">
+			<div class="rcssxq_content">
 			<div class="rcssxq_header">
 				<img src="../../src/assets/img/login/jdtt_png.png" class="headerbg"/>
 				<img src="../../src/assets/img/login/tx2.png" style="width:1.5rem;height:1.5rem;display:block;" class="headerimg"/>
-				<x-header title="菲菲" :left-options="{showBack:true,backText:''}" style="position:absolute;left:0;top:0;width:100%;background:none;"><a slot="right" @click="morefn">更多</a></x-header>
+				
 				<div :class="[{editmore:true,editmoreanimat:isanimate}]">
 					<ul>
 						<li>
 							<router-link to="/Rzdw2"><a class="edit_f8">编辑</a></router-link>
 						</li>
-						<li>
+						<li @click="isfavfn" :class="{defav:!hadfav,bluefav:hadfav}">
 							收藏
 						</li>
 					</ul>
@@ -24,7 +25,7 @@
 			      			<li class="uk-clearfix dot-color-1">
 	                            <span class="line"><em></em></span>
 	                            <span class="nature">姓名：</span>
-	                            <span class="value">张三</span>
+	                            <span class="value">zhangsan</span>
                         	</li>
                         	<li class="uk-clearfix dot-color-1">
 	                            <span class="line"><em></em></span>
@@ -241,6 +242,7 @@
 			    </card>
 			</div>
 		</div><!--中间主体-->
+		</scroller>
 	    <div class="rcssxq_foot">
 	    	<div class="foot_evaluate">
 	    		<router-link to="/Evaluate">
@@ -251,12 +253,13 @@
 	    		查看联系方式
 	    	</div>
 	    </div>
+	    <toast v-model="showPositionValue" type="text" :time="800" is-show-mask position="middle" width="2rem">{{toasttitle}}</toast>
   	</div>
 </template>
 
 <script>
-import { XHeader, GroupTitle, XButton, Divider, Grid, GridItem, Tabbar, TabbarItem, Group, Cell, Card, Flow, FlowState, FlowLine } from 'vux'
-
+import { XHeader, GroupTitle, XButton, Divider, Grid, GridItem, Tabbar, TabbarItem, Group, Cell, Card, Flow, FlowState, FlowLine, Toast, Scroller } from 'vux'
+import {api} from '../utils'
 
 export default {
   components: {
@@ -273,7 +276,9 @@ export default {
     Card,
     Flow,
     FlowState,
-    FlowLine
+    FlowLine,
+    Toast,
+    Scroller
   },
   ready () {
   },
@@ -284,13 +289,49 @@ export default {
   		}else{
    			this.isanimate=true;
   		}
+  		this.$emit("userevent","this is a pencil");
+  	},
+  	isfavfn () {
+  		let propId=this.$route.params.id;
+  		if(this.hadfav){
+  			api('/share/collectParttime',{id:propId}, callback => {
+	    		var result=callback.data.result;
+	    		if(result){
+	    			this.showPositionValue=true;
+	    			this.toasttitle="取消收藏";
+	    			this.hadfav=false;
+	    		}
+			})
+  		}else{
+  			api('/share/collectParttime',{id:propId}, callback => {
+	    		var result=callback.data.result;
+	    		if(result){
+	    			this.showPositionValue=true;
+	    			this.toasttitle="收藏成功";
+	    			this.hadfav=true;
+	    		}
+			})
+  		}
+  	},
+  	onScrollfn (pos) {
+  		/*var ff=document.getElementsByClassName("vux-header")[0];*/
+  		var getele=this.$refs.myheader.$el;
+  		if(pos.top>=155){//在滚动距离是155的时候，头部颜色变化
+  			getele.style.background="#2a7dad";
+  		}else{
+  			getele.style.background="transparent";
+  		}
   	}
   },
   data () {
     return {
-    	isanimate:false
+    	isanimate:false,
+    	hadfav:false,
+    	toasttitle:" ",//提示词语
+    	showPositionValue:false//控制提示框
     }
   }
+  
 }
 </script>
 
@@ -302,21 +343,30 @@ export default {
 	height:100%;
 	display:flex;
 	flex-direction:column;
+	position:relative;
 }
 .rcssxq_content{
 	width:100%;
 	height:100%;
 	background:#f3f3f3;
-	overflow-x:hidden;
-	overflow-y: scroll;
+	/*overflow-x:hidden;
+	overflow-y: scroll;*/
 }
 .rcssxq_wrap .vux-header{
-	background:rgba(0,0,0,0) !important;
+	/*background:rgba(0,0,0,0) !important;*/
+	z-index:9;
 }
 .rcssxq_foot{
 	height:1.1rem;
 	display:flex;
+	position:fixed;
+	bottom:0;
+	z-index:100;
+	width:100%;
 	font-size:.23rem;
+}
+.rcssxq_foot .foot_evaluate{
+	background:#fff;
 }
 .rcssxq_foot div{
 	flex-grow:1;
@@ -644,10 +694,18 @@ export default {
 	background:url('../../src/assets/img/login/compile.png') no-repeat left;
 	background-size: 21%;
 }
-.editmore ul li:nth-child(2){
+.editmore .defav{
+	background:url('http://i1.cfimg.com/611341/9e86500dd2b67b02.png') no-repeat left;
+	color:#323232;
+}
+.editmore .bluefav{
+	background:url('http://i4.cfimg.com/611341/f86b8cd018a043c6.png') no-repeat left;
+	color:#2A7DAD;
+}
+/*.editmore ul li:nth-child(2){
 	background:url('../../src/assets/img/login/collect2_icon.png') no-repeat left;
 	background-size: 21%;
-}
+}*/
 /*修改圆点*/
 div.circlediv{
 	display:flex;

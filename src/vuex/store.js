@@ -5,7 +5,6 @@ Vue.use(Vuex)
 
 const state = {
   isLoading: false,
-  direction: 'forward'
 }
 export default new Vuex.Store({
   state,
@@ -13,7 +12,7 @@ export default new Vuex.Store({
     UPDATE_LOADING (state, status) {
       state.isLoading = status
     },
-    UPDATE_DIRECTION (state, direction) {
+    UPDATE_DIRECTION (state, payload) {
       state.direction = direction
     }
   }

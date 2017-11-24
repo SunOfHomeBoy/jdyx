@@ -6,11 +6,11 @@
 		<div class="editresume_content editresume_main">
 			<div class="viewfulltimefile">
 				<div class="trans"></div>
-				<div class="smallbox"><router-link to="/Rcssxq">查看全职档案</router-link></div>
+				<div class="smallbox"><router-link :to="{name:'Rcssxq',params:{id:1001,name:'121'}}">查看全职档案</router-link></div>
 			</div>
 			<div class="viewparttimefile">
 				<div class="trans"></div>
-				<div class="smallbox"><router-link to="/Rcgxxq/12">查看兼职档案</router-link></div>
+				<div class="smallbox"><router-link :to="{name:'Rcgxxq',params:{id:1001,name:'121'}}">查看兼职档案</router-link></div>
 			</div>
 		</div>
   	</div>
@@ -74,7 +74,7 @@ div.editresume_foot{
 }
 div.viewfulltimefile{
 	height:50%;
-	background:url('../../src/assets/img/login/banner.png') no-repeat;
+	background:url('http://i4.cfimg.com/611341/6342d711ae479079.png') no-repeat;
 	background-size: cover;
 	position:relative;
 }
@@ -109,7 +109,7 @@ div.viewfulltimefile .smallbox a{
 }
 div.viewparttimefile{
 	height:50%;
-	background:url('../../src/assets/img/login/banner.png') no-repeat;
+	background:url('http://i4.cfimg.com/611341/06330878c5c901f1.jpg') no-repeat;
 	background-size: cover;
 	position:relative;
 }

@@ -1,25 +1,26 @@
 <template>
 	<div class="rcgx_wrap">
+		<loading :show="isLoading" position="absolute" text="加载中"></loading>
 		<div class="rcgx_content rcgx_header">
-			<x-header title="人才共享" :left-options="leftcontent"><a slot="right"><img src="../../src/assets/img/login/seek2_icon.png" style="width:.4rem;height:.4rem;"/></a></x-header>
+			<x-header title="人才共享" :left-options="leftcontent"><a slot="right"><img src="http://i4.cfimg.com/611341/406f3ecc5960fa87.png" style="width:.4rem;height:.4rem;"/></a></x-header>
 			<div class="rcgx_choices">
 				<ul>
 					<li>
-						<span style="position:relative;">
-							<em style="padding-right:0.2rem;">性别</em><img src="../../src/assets/img/photo/jt_top.svg" style="width:.2rem;height:.25rem;" :class="{imgrotatetop:showsexdialog}"/>
-							<input type="checkbox" style="position:absolute;top;0;left:0;width:100%;height:100%;opacity:0" v-model="showsexdialog" @click="sexfn"/>
+						<span style="position:relative;" :class="{defaultimg:!showsexdialog,imgrotatetop:showsexdialog}">
+							<em style="padding-right:0.2rem;">性别</em><a></a>
+							<input type="checkbox" class="hideinput" v-model="showsexdialog" @click="sexfn"/>
 						</span>
 					</li>
 					<li>
-						<span style="position:relative;">
-							<em style="padding-right:0.2rem;">年龄</em><img src="../../src/assets/img/photo/jt_top.svg" style="width:.2rem;height:.25rem;" :class="{imgrotatetop:showagedialog}"/>
-							<input type="checkbox" style="position:absolute;top;0;left:0;width:100%;height:100%;opacity:0;" v-model="showagedialog" @click="agefn"/>
+						<span style="position:relative;" :class="{defaultimg:!showagedialog,imgrotatetop:showagedialog}">
+							<em style="padding-right:0.2rem;">年龄</em><a></a>
+							<input type="checkbox" class="hideinput" v-model="showagedialog" @click="agefn"/>
 						</span>
 					</li>
 					<li>
-						<span style="position:relative;">
-							<em style="padding-right:0.2rem;">全部职位</em><img src="../../src/assets/img/photo/jt_top.svg" style="width:.2rem;height:.25rem;" :class="{imgrotatetop:showzhiweidialog}"/>
-							<input type="checkbox" style="position:absolute;top;0;left:0;width:100%;height:100%;opacity:0;" v-model="showzhiweidialog" @click="zhiweifn"/>
+						<span style="position:relative;" :class="{defaultimgmore:!showzhiweidialog,imgrotatetopmore:showzhiweidialog}">
+							<em style="padding-right:0.2rem;">全部职位</em><a style="height:.23rem;"></a>
+							<input type="checkbox" class="hideinput" v-model="showzhiweidialog" @click="zhiweifn"/>
 						</span>
 					</li>
 				</ul>
@@ -84,11 +85,11 @@
 	        		</li>
 	        	</template>
 	        </ul>
-	        <div :class="{allselects:true,heightbottom2:showzhiweidialog}" style="" v-show="showzhiweidialog">
+	        <div :class="{allselects:true,heightbottom2:showzhiweidialog}" v-show="showzhiweidialog">
 	        	<scroller lock-x height="9rem">
 	        		<div class="select_content">
 						<template v-for="(item,index) in alljobs">
-	        				<div style="font-size:0.25rem;display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:.2rem;"><span>{{item.title}}</span><span><img src="../../src/assets/img/photo/jt_bottom.svg" style="width:.3rem;height:.3rem;"/></span></div>
+	        				<div class="title"><span>{{item.title}}</span><span><img src="../../src/assets/img/photo/jt_bottom.svg" style="width:.3rem;height:.3rem;"/></span></div>
 							<ul>
 								<checker
 								    v-model="selectedjobs"
@@ -108,12 +109,13 @@
 				</div>
 			</div>
 	    </div>
+	    <toast v-model="showPositionValue" type="text" :time="800" is-show-mask position="middle" width="2rem">{{toasttitle}}</toast>
   	</div>
   	
 </template>
 
 <script>
-import { XHeader, GroupTitle, XButton, Grid, GridItem, Group, Scroller, Checker, CheckerItem, LoadMore } from 'vux'
+import { XHeader, GroupTitle, XButton, Grid, GridItem, Group, Scroller, Checker, CheckerItem, LoadMore, Loading, Toast } from 'vux'
 import PullTo from 'vue-pull-to'
 import {api} from '../utils'
 export default {
@@ -128,13 +130,16 @@ export default {
     LoadMore,
     Checker,
     CheckerItem,
-    PullTo
+    PullTo,
+    Loading,
+    Toast
   },
   created () {
   	//从全局变量中获取到全部职位
   	this.alljobs=jdyxData.rcssalljobs;
   	var pageParam=this.pageparams;
   	api('/share/listParttime', pageParam, callback => {
+  		this.isLoading=false;
 	  	var data=callback.data.items;
 	  	this.rcgx_contens=data;
 	})
@@ -155,7 +160,10 @@ export default {
     	alljobs:[],//全部职位
     	selectedjobs:[],
     	searchparams:{"sex":0,"age":0,"alljob":" "},
-    	pageparams:{"begins":1,"limit":20}
+    	pageparams:{"begins":1,"limit":20},
+    	isLoading:true,
+    	toasttitle:"",
+    	showPositionValue:false
     }
   },
   methods: {
@@ -245,14 +253,16 @@ export default {
     	var propId=el.getAttribute("data-index");
     	var nextEl=el.nextSibling;
     	if(el.getAttribute("class").indexOf('havelike')>-1){
-    		api('/share/atParttime',{id:propId}, callback => {
+    		this.showPositionValue=true;
+    		this.toasttitle="已收藏";
+    		/*api('/share/atParttime',{id:propId}, callback => {
 	    		var result=callback.data.result;
 	    		if(result){
 	    			el.removeAttribute("class","havelike");
 	    			el.setAttribute("class","nolike");
 	    			nextEl.innerText=--nextEl.innerText;
 	    		}
-			})
+			})*/
     	}else{
     		api('/share/atParttime',{id:propId}, callback => {
 	    		var result=callback.data.result;
@@ -396,8 +406,8 @@ div.rcgx_choices .jt_x{
 }
 .rcgx_alloptions li div.rcgx_alloptions_img>img{
 	display: block;
-	width:1.2rem;
-	height:1.2rem;
+	width:1.1rem;
+	height:1.1rem;
 	
 }
 .rcgx_alloptions li div.rcgx_alloptions_text{
@@ -560,8 +570,13 @@ div.sexoptions li input:checked+span{
 	overflow:hidden;
 	position:relative;
 }
-.select_content{
-	
+.select_content .title{
+	font-size:0.25rem;
+	display:flex;
+	flex-direction:row;
+	justify-content:space-between;
+	align-items:center;
+	padding:.2rem;
 }
 .select_content ul{
 	display:flex;
@@ -674,7 +689,7 @@ div.resetok span:nth-child(2){
 		height:10rem
 	}
 }
-.imgrotatetop{
+/*.imgrotatetop{
 	animation:showrotatetop .3s forwards;
 }
 @-webkit-keyframes showrotatetop{
@@ -684,16 +699,36 @@ div.resetok span:nth-child(2){
 	100%{
 		transform:rotate(180deg)
 	}
+}*/
+.rcgx_choices a{
+	display:inline-block;
+	width:.25rem;
+	height:.2rem;
 }
-.imgrotatebottom{
-	animation:showrotatebottom .3s forwards;
+span.defaultimg a{
+	background:url("http://i4.cfimg.com/611341/72bdb9ffd32c8ed2.png");
 }
-@-webkit-keyframes showrotatebottom{
-	0%{
-		transform:rotate(180deg)
-	}
-	100%{
-		transform:rotate(0deg)
-	}
+span.imgrotatetop a{
+	background:url("http://i4.cfimg.com/611341/818308d6f045382c.png");
+}
+div.rcgx_choices>ul span.imgrotatetop em{
+	color:#2A7DAD;
+}
+span.defaultimgmore a{
+	background:url("http://i2.cfimg.com/611341/0c98d477280e8680.png");
+}
+span.imgrotatetopmore a{
+	background:url("http://i2.cfimg.com/611341/9fb5e3e9dad03180.png");
+}
+div.rcgx_choices>ul span.imgrotatetopmore em{
+	color:#2A7DAD;
+}
+.rcgx_wrap .hideinput{
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	opacity:0;
 }
 </style>

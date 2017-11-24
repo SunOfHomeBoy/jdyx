@@ -68,7 +68,7 @@ div.selectresume_main{
 
 div.viewfulltimefile{
 	height:20rem;
-	background:url('../../src/assets/img/login/banner.png') no-repeat;
+	background:url('http://i4.cfimg.com/611341/6342d711ae479079.png') no-repeat;
 	background-size: cover;
 	position:relative;
 }
@@ -98,7 +98,7 @@ div.viewfulltimefile .smallbox{
 }
 div.viewparttimefile{
 	height:20rem;
-	background:url('../../src/assets/img/login/banner.png') no-repeat;
+	background:url('http://i4.cfimg.com/611341/06330878c5c901f1.jpg') no-repeat;
 	background-size: cover;
 	position:relative;
 }

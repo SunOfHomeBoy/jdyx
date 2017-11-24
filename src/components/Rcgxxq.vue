@@ -1,171 +1,174 @@
 <template>
 	<div class="rcgxxq_wrap">
-		<div class="rcgxxq_content">
-			<div class="rcgxxq_header">
-				<img src="../../src/assets/img/login/jdtt_png.png" class="headerbg"/>
-				<img src="../../src/assets/img/login/tx2.png" style="width:1.5rem;height:1.5rem;display:block;" class="headerimg"/>
-				<x-header title="菲菲" :left-options="{showBack:true,backText:''}" style="position:absolute;left:0;top:0;width:100%;background:none;"><a slot="right" @click="morefn">更多</a></x-header>
-				<div :class="[{editmore:true,editmoreanimat:isanimate}]">
-					<ul>
-						<li>
-							<router-link to="/Rzdw"><a class="edit_f8">编辑</a></router-link>
-						</li>
-						<li>
-							收藏
-						</li>
-					</ul>
+		<x-header title="菲菲" :left-options="{showBack:true,backText:''}" style="position:absolute;left:0;top:0;width:100%;background:none;" ref="myheader"><a slot="right" @click="morefn">更多</a></x-header>
+		<scroller lock-x :bounce=false @on-scroll="onScrollfn">
+			<div class="rcgxxq_content">
+				<div class="rcgxxq_header">
+					<img src="../../src/assets/img/login/jdtt_png.png" class="headerbg"/>
+					<img src="../../src/assets/img/login/tx2.png" style="width:1.5rem;height:1.5rem;display:block;" class="headerimg"/>
+					
+					<div :class="[{editmore:true,editmoreanimat:isanimate}]">
+						<ul>
+							<li>
+								<router-link to="/Rzdw"><a class="edit_f8">编辑</a></router-link>
+							</li>
+							<li @click="isfavfn" :class="{defav:!hadfav,bluefav:hadfav}">
+								收藏
+							</li>
+						</ul>
+					</div>
 				</div>
-			</div>
-			<div class="rcgxxq_main">
-				<card :header="{title:'基本信息'}">
-			      <div slot="content" class="card-demo-flex card-demo-content01">
-			      		<ul class="stepmsg">
-			      			<li class="uk-clearfix dot-color-1">
-	                            <span class="line"><em></em></span>
-	                            <span class="nature">姓名：</span>
-	                            <span class="value">张三</span>
-                        	</li>
-                        	<li class="uk-clearfix dot-color-1">
-	                            <span class="line"><em></em></span>
-	                            <span class="nature">性别：</span>
-	                            <span class="value"></span>
-                        	</li>
-                        	<li class="uk-clearfix dot-color-1">
-	                            <span class="line"><em></em></span>
-	                            <span class="nature">年龄：</span>
-	                            <span class="value">23</span>
-                        	</li>
-                        	<li class="uk-clearfix dot-color-1">
-	                            <span class="line"><em></em></span>
-	                            <span class="nature">性别：</span>
-	                            <span class="value">男</span>
-                        	</li>
-			      		</ul>
-			      		
-			      		<!--<flow orientation="vertical" style="height:250px;">
-					      <flow-state><span slot="label">{{ $t('人才共享') }}</span></flow-state>
-					      <flow-line></flow-line>
-					
-					      <flow-state title="已发货"></flow-state>
-					      <flow-line></flow-line>
-					
-					      <flow-state title="待收货"></flow-state>
-					      <flow-line></flow-line>
-					
-					      <flow-state title="完成"></flow-state>
-					    </flow>-->
-			      </div>
-			    </card>
-			    <card :header="{title:'联系方式'}">
-			      <div slot="content" class="card-demo-flex card-demo-content01">
-			      		<ul class="stepmsg">
-			      			<li class="uk-clearfix dot-color-1">
-	                            <span class="line"><em></em></span>
-	                            <span class="nature">电话：</span>
-	                            <span class="value">13076756432</span>
-                        	</li>
-                        	<li class="uk-clearfix dot-color-1">
-	                            <span class="line"><em></em></span>
-	                            <span class="nature">邮箱：</span>
-	                            <span class="value">10210w929@16c.com</span>
-                        	</li>
- 			      		</ul>
-			      </div>
-			    </card>
-			    <card :header="{title:'相册'}">
-			      <div slot="content" class="card-demo-flex card-demo-content01">
-			      		<ul class="stepphotomsg">
-			      			<li class="uk-photo">
-	                        	<img src="../../src/assets/img/login/tu1.png" style="width:2rem;height:3rem;"/>
-                        	</li>
-                        	<li class="uk-photo">
-	                        	<img src="../../src/assets/img/login/tu1.png"  style="width:2rem;height:3rem;"/>
-                        	</li>
-                        	<li class="uk-photo">
-	                        	<img src="../../src/assets/img/login/tu1.png" style="width:2rem;height:3rem;" />
-                        	</li>
- 			      		</ul>
-			      </div>
-			    </card>
-			    <card :header="{title:'他的技能'}">
-			      <div slot="content" class="card-demo-flex card-demo-content01">
-			      		<ul class="skill">
-			      			<li>
-			      				<span>技能评价：中级 8级</span>
-			      			</li>
-			      			<li>
-			      				<span>技能评价：中级 8级</span>
-			      			</li>
-			      			<li>
-			      				<span>技能评价：中级 8级</span>
-			      			</li>
-			      		</ul>
-			      </div>
-			    </card>
-			    <card :header="{title:'专业擅长'}">
-			      <div slot="content" class="card-demo-flex card-demo-content01">
-			      	<div class="goodAt">
-			      		私房拍摄、平面模特、礼仪模特、淘宝模特 手模、脚模、车展模特
-			      	</div>
-			      		
-			      </div>
-			    </card>
-			    <card :header="{title:'服务介绍'}">
-			      <div slot="content" class="card-demo-flex card-demo-content01">
-			      	<div class="goodAt">
-			      		热爱互联网行业，关注行业动态学习能力强热爱互 联网行业，关注行业动态学习能力强对新事物充满 好奇工作态度认真负责，具有团队合作精神对新事 物充满好奇工作态度认真负责。
-			      	</div>
-			      </div>
-			    </card>
-			    <card :header="{title:'他的评价'}">
-			      <div slot="content" class="card-demo-flex card-demo-content01">
-			      		<ul class="evaluate">
-			      			<li>
-			      				<div>
-			      					<img src="../../src/assets/img/login/tx3.png" style="width:1.2rem;height:1.2rem;display:block;"/>
-			      				</div>
-			      				<div>
-			      					<p class="e_title">会飞的鱼</p>
-			      					<p class="e_skill">技能：优</p>
-			      					<p class="e_pingjia">
-			      						评论描述评论描述评论描述评论描述！评 论描述评论描述评论描述评论描述评论描 述评论描述评论描述评论描述
-			      					</p>
-			      				</div>
-			      			</li>
-			      			<li>
-			      				<div>
-			      					<img src="../../src/assets/img/login/tx3.png" style="width:1.2rem;height:1.2rem;display:block;"/>
-			      				</div>
-			      				<div>
-			      					<p class="e_title">会飞的鱼</p>
-			      					<p class="e_skill">技能：优</p>
-			      					<p class="e_pingjia">
-			      						评论描述评论描述评论描述评论描述！评 论描述评论描述评论描述评论描述评论描 述评论描述评论描述评论描述
-			      					</p>
-			      				</div>
-			      			</li>
-			      		</ul>
-			      </div>
-			    </card>
-			</div>
-		</div><!--中间主体-->
-	    <div class="rcssxq_foot">
+				<div class="rcgxxq_main">
+					<card :header="{title:'基本信息'}">
+				      <div slot="content" class="card-demo-flex card-demo-content01">
+				      		<ul class="stepmsg">
+				      			<li class="uk-clearfix dot-color-1">
+		                            <span class="line"><em></em></span>
+		                            <span class="nature">姓名：</span>
+		                            <span class="value">张三</span>
+	                        	</li>
+	                        	<li class="uk-clearfix dot-color-1">
+		                            <span class="line"><em></em></span>
+		                            <span class="nature">性别：</span>
+		                            <span class="value"></span>
+	                        	</li>
+	                        	<li class="uk-clearfix dot-color-1">
+		                            <span class="line"><em></em></span>
+		                            <span class="nature">年龄：</span>
+		                            <span class="value">23</span>
+	                        	</li>
+	                        	<li class="uk-clearfix dot-color-1">
+		                            <span class="line"><em></em></span>
+		                            <span class="nature">性别：</span>
+		                            <span class="value">男</span>
+	                        	</li>
+				      		</ul>
+				      		
+				      		<!--<flow orientation="vertical" style="height:250px;">
+						      <flow-state><span slot="label">{{ $t('人才共享') }}</span></flow-state>
+						      <flow-line></flow-line>
+						
+						      <flow-state title="已发货"></flow-state>
+						      <flow-line></flow-line>
+						
+						      <flow-state title="待收货"></flow-state>
+						      <flow-line></flow-line>
+						
+						      <flow-state title="完成"></flow-state>
+						    </flow>-->
+				      </div>
+				    </card>
+				    <card :header="{title:'联系方式'}" v-show="ishowphone">
+				      <div slot="content" class="card-demo-flex card-demo-content01">
+				      		<ul class="stepmsg">
+				      			<li class="uk-clearfix dot-color-1">
+		                            <span class="line"><em></em></span>
+		                            <span class="nature">电话：</span>
+		                            <span class="value">13076756432</span>
+	                        	</li>
+	                        	<li class="uk-clearfix dot-color-1">
+		                            <span class="line"><em></em></span>
+		                            <span class="nature">邮箱：</span>
+		                            <span class="value">10210w929@16c.com</span>
+	                        	</li>
+	 			      		</ul>
+				      </div>
+				    </card>
+				    <card :header="{title:'相册'}">
+				      <div slot="content" class="card-demo-flex card-demo-content01">
+				      		<ul class="stepphotomsg">
+				      			<li class="uk-photo">
+		                        	<img src="../../src/assets/img/login/tu1.png" style="width:2rem;height:3rem;"/>
+	                        	</li>
+	                        	<li class="uk-photo">
+		                        	<img src="../../src/assets/img/login/tu1.png"  style="width:2rem;height:3rem;"/>
+	                        	</li>
+	                        	<li class="uk-photo">
+		                        	<img src="../../src/assets/img/login/tu1.png" style="width:2rem;height:3rem;" />
+	                        	</li>
+	 			      		</ul>
+				      </div>
+				    </card>
+				    <card :header="{title:'他的技能'}">
+				      <div slot="content" class="card-demo-flex card-demo-content01">
+				      		<ul class="skill">
+				      			<li>
+				      				<span>技能评价：中级 8级</span>
+				      			</li>
+				      			<li>
+				      				<span>技能评价：中级 8级</span>
+				      			</li>
+				      			<li>
+				      				<span>技能评价：中级 8级</span>
+				      			</li>
+				      		</ul>
+				      </div>
+				    </card>
+				    <card :header="{title:'专业擅长'}">
+				      <div slot="content" class="card-demo-flex card-demo-content01">
+				      	<div class="goodAt">
+				      		私房拍摄、平面模特、礼仪模特、淘宝模特 手模、脚模、车展模特
+				      	</div>
+				      		
+				      </div>
+				    </card>
+				    <card :header="{title:'服务介绍'}">
+				      <div slot="content" class="card-demo-flex card-demo-content01">
+				      	<div class="goodAt">
+				      		热爱互联网行业，关注行业动态学习能力强热爱互 联网行业，关注行业动态学习能力强对新事物充满 好奇工作态度认真负责，具有团队合作精神对新事 物充满好奇工作态度认真负责。
+				      	</div>
+				      </div>
+				    </card>
+				    <card :header="{title:'他的评价'}">
+				      <div slot="content" class="card-demo-flex card-demo-content01">
+				      		<ul class="evaluate">
+				      			<li>
+				      				<div>
+				      					<img src="../../src/assets/img/login/tx3.png" style="width:1.2rem;height:1.2rem;display:block;"/>
+				      				</div>
+				      				<div>
+				      					<p class="e_title">会飞的鱼</p>
+				      					<p class="e_skill">技能：优</p>
+				      					<p class="e_pingjia">
+				      						评论描述评论描述评论描述评论描述！评 论描述评论描述评论描述评论描述评论描 述评论描述评论描述评论描述
+				      					</p>
+				      				</div>
+				      			</li>
+				      			<li>
+				      				<div>
+				      					<img src="../../src/assets/img/login/tx3.png" style="width:1.2rem;height:1.2rem;display:block;"/>
+				      				</div>
+				      				<div>
+				      					<p class="e_title">会飞的鱼</p>
+				      					<p class="e_skill">技能：优</p>
+				      					<p class="e_pingjia">
+				      						评论描述评论描述评论描述评论描述！评 论描述评论描述评论描述评论描述评论描 述评论描述评论描述评论描述
+				      					</p>
+				      				</div>
+				      			</li>
+				      		</ul>
+				      </div>
+				    </card>
+				</div>
+			</div><!--中间主体-->
+		</scroller>
+	    <div class="rcssxq_foot" ref="myfoot">
 	    	<div class="foot_evaluate">
 	    		<router-link to="/Evaluate">
 	    			我要评价
 	    		</router-link>
 	    	</div>
-	    	<div>
+	    	<div @click="viewphonefn">
 	    		查看联系方式
 	    	</div>
 	    </div>
+	    <toast v-model="showPositionValue" type="text" :time="800" is-show-mask position="middle" width="2rem">{{toasttitle}}</toast>
   	</div>
 </template>
 
 <script>
-import { XHeader, GroupTitle, XButton, Divider, Grid, GridItem, Tabbar, TabbarItem, Group, Cell, Card, Flow, FlowState, FlowLine } from 'vux'
-
-
+import { XHeader, GroupTitle, XButton, Divider, Grid, GridItem, Tabbar, TabbarItem, Group, Cell, Card, Flow, FlowState, FlowLine, Toast, Scroller } from 'vux'
+import {api} from '../utils'
 export default {
   components: {
   	XHeader,
@@ -181,7 +184,9 @@ export default {
     Card,
     Flow,
     FlowState,
-    FlowLine
+    FlowLine,
+    Toast,
+    Scroller
   },
   created () {
   	console.log('传过来的参数',this.$route.params);
@@ -193,11 +198,56 @@ export default {
   		}else{
    			this.isanimate=true;
   		}
+  	},
+  	isfavfn () {
+  		let propId=this.$route.params.id;
+  		console.log(this.hadfav);
+  		if(this.hadfav){
+  			api('/share/collectParttime',{id:propId}, callback => {
+	    		var result=callback.data.result;
+	    		if(result){
+	    			console.log(this.toasttitle);
+	    			this.showPositionValue=true;
+	    			this.toasttitle="取消收藏";
+	    			this.hadfav=false;
+	    		}
+			})
+  		}else{
+  			api('/share/collectParttime',{id:propId}, callback => {
+	    		var result=callback.data.result;
+	    		if(result){
+	    			this.showPositionValue=true;
+	    			this.toasttitle="收藏成功";
+	    			this.hadfav=true;
+	    		}
+			})
+  		}
+  	},
+  	viewphonefn (){
+   		api('/share/collectParttime',{}, callback => {
+  			var result=callback.data.result;
+  			if(result){
+  				this.ishowphone=true;
+  			}
+  		})
+  	},
+  	onScrollfn (pos) {
+  		/*var ff=document.getElementsByClassName("vux-header")[0];*/
+  		var getele=this.$refs.myheader.$el;
+  		if(pos.top>=155){//在滚动距离是155的时候，头部颜色变化
+  			getele.style.background="#2a7dad";
+  		}else{
+  			getele.style.background="transparent";
+  		}
   	}
   },
   data () {
     return {
-    	isanimate:false
+    	isanimate:false,
+    	ishowphone:false,//是否显示联系方式
+    	showPositionValue:false,
+    	hadfav:false,
+    	toasttitle:""
     }
   }
 }
@@ -215,10 +265,11 @@ export default {
 	width:100%;
 	height:100%;
 	background:#f3f3f3;
-	overflow:scroll;
+	/*overflow:scroll;*/
 }
 .rcgxxq_wrap .vux-header{
-	background:rgba(0,0,0,0) !important;
+	/*background:rgba(0,0,0,0) !important;*/
+	z-index:9;
 }
 .rcgxxq_foot{
 	height:3.85rem;
@@ -253,7 +304,7 @@ export default {
 	margin-left:-0.75rem;
 	margin-top:-0.75rem;
 }
-.vux-header .vux-header-left .left-arrow:before{
+.rcgxxq_wrap .vux-header .vux-header-left .left-arrow:before{
 	border-color:#fff !important;
 }
 .rcgxxq_main{
@@ -545,9 +596,13 @@ export default {
 	background:url('../../src/assets/img/login/compile.png') no-repeat left;
 	background-size: 21%;
 }
-.editmore ul li:nth-child(2){
-	background:url('../../src/assets/img/login/collect2_icon.png') no-repeat left;
-	background-size: 21%;
+.editmore .defav{
+	background:url('http://i1.cfimg.com/611341/9e86500dd2b67b02.png') no-repeat left;
+	color:#323232;
+}
+.editmore .bluefav{
+	background:url('http://i4.cfimg.com/611341/f86b8cd018a043c6.png') no-repeat left;
+	color:#2A7DAD;
 }
 .editmore ul li .edit_f8{
  	color:#323232;
@@ -567,7 +622,7 @@ div.circlediv div.circledivleft{
 	bottom:0;
 	z-index:100;
 	width:100%;
-	font-size:.23rem;;
+	font-size:.23rem;
 }
 .rcssxq_foot .foot_evaluate{
 	background:#fff;

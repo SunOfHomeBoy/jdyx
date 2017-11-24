@@ -6,7 +6,7 @@
 		<div class="banben_content banben_main">
 				<dl style="width:2.4rem;height:3.5rem;">
 					<dt style="height:3rem;">
-						<img src="../../src/assets/img/login/gywm_tx.png" style="width:2.4rem;height:3rem;"/>
+						<img src="http://i4.cfimg.com/611341/3b144d497446f9c2.png" style="width:2.4rem;height:3rem;"/>
 					</dt>
 					<dd style="font-size:0.23rem;color:#414141;text-align: center;">
 						版本号 V1.0

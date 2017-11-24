@@ -11,7 +11,7 @@
       </transition>
       <!--bottom slot-->
       <tabbar class="vux-demo-tabbar" icon-class="vux-center" v-show="!isTabbarDemo" slot="bottom">
-        <tabbar-item :link="{path:'/'}" :selected="$route.path === '/Home'">
+        <tabbar-item :link="{path:'/'}" :selected="$route.path === '/'">
           <span class="demo-icon-22" slot="icon"><img src="../src/assets/img/login/home page_icon.png"/></span>
           <span class="demo-icon-22" slot="icon-active"><img src="../src/assets/img/login/home pagehei_icon.png"/></span>
           <span slot="label">首页</span>
@@ -87,12 +87,12 @@ export default {
   },
   methods: {
     scrollTop () {
-      this.$refs.viewbox.$refs.viewboxbody.scrollTop = 10
+      this.$refs.viewbox.$refs.viewboxbody.scrollTop = 0
     }
   },
   computed: {
     isTabbarDemo () {
-			if(/Aboutus|Banbenteam|Rechargerecord|Login|Personaldata|Jdtt|Zspx|Zspxxq|Evaluate|Myfavourite|Editpwd|Hadview|Byview|Accountmsg|Zhuce|Sz|Rcgxxq|Rcssxq|Zjrecord|Selcity|Teamzj|Personaldata|Recharge|Help|Importmoney/.test(this.$route.path)){
+			if(/Aboutus|Banbenteam|Rechargerecord|Login|Personaldata|Jdtt|Zspx|Zspxxq|Evaluate|Myfavourite|Editpwd|Hadview|Byview|Accountmsg|Zhuce|Sz|Rcgxxq|Rcssxq|Zjrecord|Selcity|Teamzj|Personaldata|Recharge|Help|Importmoney|Findpwd/.test(this.$route.path)){
 					return true;
 			}else{
 					return false;
@@ -148,7 +148,9 @@ export default {
 
 <style lang="less">
 @import './stylesheet/reset.less';
-
+.vux-slider>.vux-swiper>.vux-swiper-item>a>.vux-img{
+	background-size:100% 100% !important;
+}
 .jdyx_footer{
 		width:100%;
 		height: 1.2rem;
@@ -264,31 +266,7 @@ export default {
 
 
 
-.rcssxq_foot{
-	height:4.2rem;
-	display:flex;
-	position:absolute;
-	bottom:0;
-	z-index:100;
-	width:100%;
-	
-}
-.rcssxq_foot .foot_evaluate{
-	background:#fff;
-}
-.rcssxq_foot div{
-	flex-grow:1;
-	line-height: 4.2rem;
-	text-align: center;
-	
-}
-.rcssxq_foot div a{
-	color:#2A7DAD;
-}
-.rcssxq_foot div:nth-child(2){
-	background:#2A7DAD;
-	color:#fff;
-}
+
 /*pull-to组件的字体大小*/
 p.default-text{
 	font-size:.23rem;
@@ -371,5 +349,11 @@ p.default-text{
 .fadeOutRight {
     -webkit-animation-name: fadeOutRight;
     animation-name: fadeOutRight;
+}
+
+/*loading*/
+.weui-toast{
+	width:2.3rem !important;
+	min-height:.16rem !important;
 }
 </style>

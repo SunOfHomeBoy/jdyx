@@ -7,7 +7,7 @@
 	    	<pull-to :bottom-load-method="loadmore" :bottom-config="{pullText: '上拉加载',triggerText: '释放更新',loadingText: '加载中...',doneText: '加载完成',failText: '加载失败',loadedStayTime: 400,stayDistance: 50,triggerDistance: 70}" >
 		    	<group>
 		    		<template v-for="(item,index) in lists">
-		    			<cell  :link="{path:'/Rcgxxq/12'}">
+		    			<cell  :link="{path:'/Rcgx/Rcgxxq/12'}">
 			    		  	<span slot="title">{{ item.name }}</span>
 			    		  	<span slot="inline-desc">{{ item.viewtime}}</span>
 					        <img slot="icon" style="display:block;margin-right:2px;width:1.2rem;" src="../../src/assets/img/login/tx.png">
