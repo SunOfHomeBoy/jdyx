@@ -1,8 +1,7 @@
 <template>
-	<div class="myself_wrap">
-		<div class="myself_content myself_header">
-			<div class="myself_header_top">
-				
+	<div class="JD_myself_wrap">
+		<div class="JD_myself_content JD_myself_header">
+			<div class="JD_myself_header_top">
 				<dl>
 					<dt>
 						<router-link  to="/Myself/Personaldata">
@@ -11,27 +10,27 @@
 						
 					</dt>
 					<dd>
-						球友07558
+						{{userName}}
 					</dd>
 				</dl>
 			</div>
-			<div class="myself_header_bottom">
+			<div class="JD_myself_header_bottom">
 				<div>
 					<router-link to="/Myself/Hadview">
-						<span style="text-align: center;">30</span>
+						<span style="text-align: center;">{{checked}}</span>
 						<span>已查看</span>
 					</router-link>
 				</div>
 				<div></div>
 				<div>
 					<router-link to="/Myself/Byview">
-						<span style="text-align: center;">30</span>
+						<span style="text-align: center;">{{beViewed}}</span>
 						<span>被查看</span>
 					</router-link>
 				</div>
 			</div>
 		</div>
-		<div class="myself_content myself_main" >
+		<div class="JD_myself_content JD_myself_main" >
 			<group>
 				<cell :title="$t('账户信息')" :link="{path:'/Myself/Accountmsg'}">
         			<img slot="icon"  style="display:block;margin-right:5px;width:.5rem;height:.5rem;" src="../../../src/assets/img/login/account information_icon.png">
@@ -75,6 +74,9 @@ export default {
   data () {
     return {
     	index: 0,
+			userName:"球友07558",
+			checked:"31",
+			beViewed:"30"
      }
   },
   methods: {
@@ -89,28 +91,28 @@ export default {
 <style>
 @import '../../stylesheet/reset.less';
 
-.myself_wrap input::-webkit-input-placeholder{
+.JD_myself_wrap input::-webkit-input-placeholder{
 	color:#BEBEBE;
 	font-size:0.29rem;
 }
-.myself_wrap .myself .vux-header{
+.JD_myself_wrap .JD_myself .vux-header{
 	background: #2A7DAD !important;
 }
-.myself_wrap{
+.JD_myself_wrap{
 	width:100%;
 	height:100%;
 }
-.myself_header{
+.JD_myself_header{
 	width:100%;
 	background:url("../../../src/assets/img/login/zspx.png") no-repeat;
 	background-size: cover;
 	position:relative;
 	
 }
-div.myself_header_top{
+div.JD_myself_header_top{
 	
 }
-div.myself_header_top dl{
+div.JD_myself_header_top dl{
 	width:1.5rem;
 	
 	margin:auto;
@@ -120,19 +122,19 @@ div.myself_header_top dl{
 	padding-top:1rem;
 	padding-bottom:1.8rem;
 }
-div.myself_header_top dl dt a{
+div.JD_myself_header_top dl dt a{
 	display:block;
 	margin:auto;
 	
 }
-div.myself_header_top dd{
+div.JD_myself_header_top dd{
 	font-size:.3rem;
 	color:#2a7dad;
 	text-shadow:#000 0.01rem 0.01rem 0.01rem;
 	margin-top:.2rem;
 	text-align: center;
 }
-div.myself_header_bottom{
+div.JD_myself_header_bottom{
 	width:100%;
 	height:1rem;
 	background:#484848;
@@ -145,41 +147,41 @@ div.myself_header_bottom{
 	left:0;
 	font-size:0.23rem;
 }
-div.myself_header_bottom>div span{
+div.JD_myself_header_bottom>div span{
 	color:#fff;
 }
-div.myself_header_bottom>div:nth-child(1){
+div.JD_myself_header_bottom>div:nth-child(1){
 	display:flex;
 	flex-direction:column;
 	align-items:center;
 	width:50%;
 }
-div.myself_header_bottom>div:nth-child(1) span{
+div.JD_myself_header_bottom>div:nth-child(1) span{
 	display:block;
 	
 }
-div.myself_header_bottom>div:nth-child(2){
+div.JD_myself_header_bottom>div:nth-child(2){
 	width:0.0179rem;
 	height:0.625rem;
 	background:#fff;
 }
-div.myself_header_bottom>div:nth-child(3){
+div.JD_myself_header_bottom>div:nth-child(3){
 	display:flex;
 	flex-direction:column;
 	align-items:center;
 	width:50%;
 }
-div.myself_header_bottom>div:nth-child(3) span{
+div.JD_myself_header_bottom>div:nth-child(3) span{
 	display:block;
 }
-.myself_wrap .vux-label{
+.JD_myself_wrap .vux-label{
 	font-size:0.3rem;
 	padding-left:0.5rem;
 }
-.myself_wrap .weui-cells:before{
+.JD_myself_wrap .weui-cells:before{
 	border-top:0 !important;
 }
-.myself_wrap .weui-cell{
+.JD_myself_wrap .weui-cell{
 	padding:14px 15px !important;
 }
 </style>

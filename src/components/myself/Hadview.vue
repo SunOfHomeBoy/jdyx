@@ -1,13 +1,13 @@
 <template>
-	<div class="hadview_wrap">
-		<div class="hadview_content hadview_header">
+	<div class="JD_hadview_wrap">
+		<div class="JD_hadview_content JD_hadview_header">
 			<x-header :left-options="{showBack:true,backText:''}">已查看</x-header>
 		</div>
-	    <div class="hadview_main" style="height:100%;">
+	    <div class="JD_hadview_main" style="height:100%;">
 	    	<pull-to :bottom-load-method="loadmore" :bottom-config="{pullText: '上拉加载',triggerText: '释放更新',loadingText: '加载中...',doneText: '加载完成',failText: '加载失败',loadedStayTime: 400,stayDistance: 50,triggerDistance: 70}" >
 		    	<group>
 		    		<template v-for="(item,index) in lists">
-		    			<cell  :link="{name:'Rcgxxq',params:{id:10001}}">
+		    			<cell  :link="{name:'Rcgxxq',params:{id:10001}}" :key="index">
 			    		  	<span slot="title">{{ item.name }}</span>
 			    		  	<span slot="inline-desc">{{ item.viewtime}}</span>
 					        <img slot="icon" style="display:block;margin-right:2px;width:1.2rem;" src="../../../src/assets/img/login/tx.png">
@@ -74,37 +74,37 @@ export default {
 <style lang="less">
 @import '../../stylesheet/reset.less';
 
-.hadview_wrap{
+.JD_hadview_wrap{
 	width:100%;
 	height:100%;
 	display:flex;
 	flex-direction:column;
 }
 
-.hadview_wrap .vux-header{
+.JD_hadview_wrap .vux-header{
 	background: #2A7DAD !important;
 }
-.hadview_wrap .vux-header .vux-header-title{
+.JD_hadview_wrap .vux-header .vux-header-title{
 	font-family: 'PingFangSC-Light' !important;
 	font-size:.28rem !important;
 }
-.hadview_content{
+.JD_hadview_content{
 	width:100%;
 }
-.hadview_wrap .vux-cell-primary{
+.JD_hadview_wrap .vux-cell-primary{
 	padding-left:.2rem !important;
 	padding-top:0.2rem;
 }
-.hadview_wrap .weui-cells{
+.JD_hadview_wrap .weui-cells{
 	margin-top:0 !important;
 }
-.hadview_wrap .vux-label-desc{
+.JD_hadview_wrap .vux-label-desc{
 	color:#ccc !important;
 }
-.hadview_wrap .vux-label{
+.JD_hadview_wrap .vux-label{
 	font-size:.34rem;
 }
-.hadview_wrap .weui-cells::before{
+.JD_hadview_wrap .weui-cells::before{
 	border:0 !important;
 }
 

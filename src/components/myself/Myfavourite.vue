@@ -1,6 +1,6 @@
 <template>
-	<div class="fv_wrap">
-		<div class="fv_content fv_header">
+	<div class="JD_fv_wrap">
+		<div class="JD_fv_content JD_fv_header">
 			<x-header :left-options="{showBack:true,backText:''}">
 				<span style="block;float:left;margin-left:25%;">我的收藏</span>
 			    <span style="display:block;float:left;position:relative;">
@@ -9,22 +9,21 @@
 			    </span>
 			</x-header>
 		</div>
-		<div class="fv_content fv_main">
-			<div class="fv_main_contains">
-				
+		<div class="JD_fv_content JD_fv_main">
+			<div class="JD_fv_main_contains">
 					<ul>
 						<li>
 							<dl>
 								<dt>
-									<img src="../../../src/assets/img/photo/02.jpg" style="width:1.8rem;height:1.8rem;"/>
+									<img :src="imgSrc" style="width:1.8rem;height:1.8rem;"/>
 								</dt>
 								<dd>
-									<h4>语音助理战国时代谁有机会拿下...</h4>
+									<h4>{{title}}</h4>
 									<p>
-										从IT到DT，各行各业都会进入一个新发展 周期，重视、投资数据......
+										{{content}}
 									</p>
 									<p>
-										2017.01.02 13:30
+										{{time}}
 									</p>
 								</dd>
 							</dl>
@@ -34,11 +33,11 @@
 				
 			</div>
 		</div>
-		<div class="popupsex" v-show="showDialogStyle">
+		<div class="JD_popupsex" v-show="showDialogStyle">
 			<div :class="{favourite_trans:true,popupbottomfav:showDialogStyle}">
-				<ul class="dialog_topcontentfav">
+				<ul class="JD_dialog_topcontentfav">
 		        	<template v-for="(it,index) in favtype">
-		        		<li :class="{active:isactive==index}" @click="selfavoritetype(index)">
+		        		<li :class="{active:isactive==index}" @click="selfavoritetype(index)" :key="index">
 		        			<span>{{it}}</span>
 		        		</li>
 		        	</template>
@@ -52,7 +51,9 @@
 <script>
 import { XHeader, GroupTitle, XButton, Divider } from 'vux'
 import {api} from '../../utils'
-import PullTo from 'vue-pull-to'
+import PullTo from 'vue-pull-to';
+import imgSrc from '../../../src/assets/img/photo/02.jpg';
+
 export default {
   components: {
   	XHeader,
@@ -69,7 +70,11 @@ export default {
   },
   data () {
     return {
-    	index: 0,
+			title:"语音助理战国时代谁有机会拿下...",
+			content:"从IT到DT，各行各业都会进入一个新发展 周期，重视、投资数据......",
+			time:"2017.01.02 13:30",
+			index: 0,
+			imgSrc:imgSrc,
     	isactive: 0,
     	showDialogStyle: false,
     	isrotate: false,
@@ -99,58 +104,58 @@ export default {
 <style lang="less">
 @import '../../stylesheet/reset.less';
 
-.fv_wrap{
+.JD_fv_wrap{
 	width:100%;
 	height:100%;
 	display:flex;
 	flex-direction:column;
 	
 }
-.fv_header{
+.JD_fv_header{
 	width:100%;
 	/*height:3.8rem;*/
 }
-.fv_header .vux-header{
+.JD_fv_header .vux-header{
 	background:#2a7dad !important;
 }
-.fv_header .vux-header .vux-header-title{
+.JD_fv_header .vux-header .vux-header-title{
 	font-family: 'PingFangSC-Light' !important;
 	font-size:.28rem !important;
 	
 }
 /*主体*/
-div.fv_main{
+div.JD_fv_main{
 	position:relative;
 }
 
-div.fv_main_contains ul{
+div.JD_fv_main_contains ul{
 	padding-left:.2rem;
 	margin-top:.2rem;
 	
 }
-div.fv_main_contains ul p{
+div.JD_fv_main_contains ul p{
 	font-size:0.23rem;
 }
-div.fv_main_contains ul li{
+div.JD_fv_main_contains ul li{
 	border-bottom:1px solid #bbbbbb;
 	height:2rem;
 }
-div.fv_main_contains ul li:not(:first-child){
+div.JD_fv_main_contains ul li:not(:first-child){
 	margin-top:.2rem;
 }
-div.fv_main_contains ul li dl{
+div.JD_fv_main_contains ul li dl{
 	display:flex;
 }
-div.fv_main_contains ul li dt{
+div.JD_fv_main_contains ul li dt{
 	width:1.8rem;
 	height:1.8rem;
 	display:flex;
 	align-items:center;
 }
-div.fv_main_contains ul li dt img{
+div.JD_fv_main_contains ul li dt img{
 	display:block;
 }
-div.fv_main_contains ul li dd{
+div.JD_fv_main_contains ul li dd{
 	display:flex;
 	flex-direction:column;
 	font-size:0.23rem;
@@ -159,16 +164,16 @@ div.fv_main_contains ul li dd{
 	justify-content:space-between;
 
 }
-div.fv_main_contains ul li dd h4{
+div.JD_fv_main_contains ul li dd h4{
 	font-size:0.3rem;
 	color:#414141;
 	height:.4rem;
 	line-height:.4rem;
 }
-div.fv_main_contains_img{
+div.JD_fv_main_contains_img{
 	height:13rem;
 }
-div.fv_main_contains_img img{
+div.JD_fv_main_contains_img img{
 	height:13rem;
 }
 
@@ -189,7 +194,7 @@ div.fv_main_contains_img img{
 		overflow-y: hidden; 
 		padding-bottom: 15px;
 	}
-	.header{
+	.JD_header{
 		width: 100%;
 		height: 50px;
 		background-color: #fff;
@@ -205,7 +210,7 @@ div.fv_main_contains_img img{
 		text-align: center;
 		text-transform: uppercase;
 	}
-	.header .item.active{
+	.JD_header .item.active{
 	
 		color: #414141;
 	}
@@ -213,7 +218,7 @@ div.fv_main_contains_img img{
 		border-right: 1px solid rgba(0,0,0,.2);
 	}*/
 /*遮罩层*/
-.popupsex{
+.JD_popupsex{
 	width:100%;
 	height: 100%;
 	background:rgba(0,0,0,0.53);
@@ -227,12 +232,12 @@ div.fv_main_contains_img img{
 	height:0;
 	overflow:hidden;
 }
-.dialog_topcontentfav{
+.JD_dialog_topcontentfav{
 	width:100%;
 	background:#fff;
 	padding:0 .2rem 0 .2rem;
 }
-.dialog_topcontentfav li{
+.JD_dialog_topcontentfav li{
 	border-bottom:1px solid #CACACA;
 	height:.8rem;
 	line-height:.8rem;
@@ -240,7 +245,7 @@ div.fv_main_contains_img img{
 	font-size:.23rem;
 	padding-right:4rem;
 }
-.dialog_topcontentfav li.active{
+.JD_dialog_topcontentfav li.active{
 	color:#2A7DAD;
 	background:url('../../../src/assets/img/photo/checked.svg') no-repeat 95% 1rem;
 	background-size:5%;

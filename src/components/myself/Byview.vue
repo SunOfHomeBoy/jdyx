@@ -1,13 +1,13 @@
 <template>
-	<div class="byview_wrap">
-		<div class="byview_content byview_header">
+	<div class="JD_byview_wrap">
+		<div class="JD_byview_content JD_byview_header">
 			<x-header :left-options="{showBack:true,backText:''}">被查看</x-header>
 		</div>
-	    <div class="byview_main" style="height:100%;">
+	    <div class="JD_byview_main" style="height:100%;">
 	    	<pull-to :bottom-load-method="loadmore" :bottom-config="{pullText: '上拉加载',triggerText: '释放更新',loadingText: '加载中...',doneText: '加载完成',failText: '加载失败',loadedStayTime: 400,stayDistance: 50,triggerDistance: 70}" >
 		    	<group>
 		    		<template v-for="(item,index) in lists">
-		    			<cell  :link="{path:'/Rcgx/Rcgxxq/12'}">
+		    			<cell  :link="{path:'/Rcgx/Rcgxxq/12'}" :key="index">
 			    		  	<span slot="title">{{ item.name }}</span>
 			    		  	<span slot="inline-desc">{{ item.viewtime}}</span>
 					        <img slot="icon" style="display:block;margin-right:2px;width:1.2rem;" src="../../../src/assets/img/login/tx.png">
@@ -75,37 +75,37 @@ export default {
 <style lang="less">
 @import '../../stylesheet/reset.less';
 
-.byview_wrap{
+.JD_byview_wrap{
 	width:100%;
 	height:100%;
 	display:flex;
 	flex-direction:column;
 }
 
-.byview_wrap .vux-header{
+.JD_byview_wrap .vux-header{
 	background: #2A7DAD !important;
 }
-.byview_wrap .vux-header .vux-header-title{
+.JD_byview_wrap .vux-header .vux-header-title{
 	font-family: 'PingFangSC-Light' !important;
 	font-size:.28rem !important;
 }
-.byview_content{
+.JD_byview_content{
 	width:100%;
 }
-.byview_wrap .vux-cell-primary{
+.JD_byview_wrap .vux-cell-primary{
 	padding-left:.2rem !important;
 	padding-top:0.2rem;
 }
-.byview_wrap .weui-cells{
+.JD_byview_wrap .weui-cells{
 	margin-top:0 !important;
 }
-.byview_wrap .vux-label-desc{
+.JD_byview_wrap .vux-label-desc{
 	color:#ccc !important;
 }
-.byview_wrap .vux-label{
+.JD_byview_wrap .vux-label{
 	font-size:.34rem;
 }
-.byview_wrap .weui-cells::before{
+.JD_byview_wrap .weui-cells::before{
 	border:0 !important;
 }
 

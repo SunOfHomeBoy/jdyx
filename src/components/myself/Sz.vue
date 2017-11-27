@@ -26,8 +26,19 @@
 </template>
 
 <script>
-import { XHeader, GroupTitle, XButton, Divider, Grid, GridItem, Tabbar, TabbarItem, Group, Cell, XInput } from 'vux'
-
+import {
+  XHeader,
+  GroupTitle,
+  XButton,
+  Divider,
+  Grid,
+  GridItem,
+  Tabbar,
+  TabbarItem,
+  Group,
+  Cell,
+  XInput
+} from "vux";
 
 export default {
   components: {
@@ -43,68 +54,62 @@ export default {
     XHeader,
     XInput
   },
-  created () {
-  },
-  mounted () {
-  	
-  },
+  created() {},
+  mounted() {},
   methods: {
-    onSwiperItemIndexChange (index) {
-    }
+    onSwiperItemIndexChange(index) {}
   },
-  data () {
-    return {
-    }
+  data() {
+    return {};
   }
-
-}
+};
 </script>
 
 <style lang="less">
-@import '../../stylesheet/reset.less';
-.sz_wrap{
-	width:100%;
-	height:100%;
+@import "../../stylesheet/reset.less";
+.sz_wrap {
+  width: 100%;
+  height: 100%;
 }
-.sz_content{
-	width:100%;
+.sz_content {
+  width: 100%;
 }
-.sz_wrap .vux-header .vux-header-title{
-	font-family: 'PingFangSC-Light' !important;
-	font-size:.28rem !important;
+.sz_wrap .vux-header .vux-header-title {
+  font-family: "PingFangSC-Light" !important;
+  font-size: 0.28rem !important;
 }
-.vux-header{
-	background: #2A7DAD !important;
-}
-
-.weui-btn_primary{
-	background-color: #2A7DAD !important;
+.vux-header {
+  background: #2a7dad !important;
 }
 
-.sz_wrap .vux-label{
-	font-size:.23rem;
-	padding-left:.2rem;
-	color:#424242;
-}
-.sz_wrap .weui-cells{
-	border-top:0 !important;
-	margin-top:0 !important;
-}
-.sz_wrap .weui_btn_primary{
-	background:#2A7DAD !important;
-}
-.sz_wrap .weui_cells{
-	font-size:.23rem !important;
-	color:#424242 !important;
-}
-.sz_wrap .weui_cell_primary{
-	padding-left:.2rem;
-}
-.sz_wrap .vux-no-group-title{
-	margin:0 !important;
+.weui-btn_primary {
+  background-color: #2a7dad !important;
 }
 
-.sz_wrap .weui-cell{
-	padding:.4rem .3rem !important;
+.sz_wrap .vux-label {
+  font-size: 0.23rem;
+  padding-left: 0.2rem;
+  color: #424242;
+}
+.sz_wrap .weui-cells {
+  border-top: 0 !important;
+  margin-top: 0 !important;
+}
+.sz_wrap .weui_btn_primary {
+  background: #2a7dad !important;
+}
+.sz_wrap .weui_cells {
+  font-size: 0.23rem !important;
+  color: #424242 !important;
+}
+.sz_wrap .weui_cell_primary {
+  padding-left: 0.2rem;
+}
+.sz_wrap .vux-no-group-title {
+  margin: 0 !important;
+}
+
+.sz_wrap .weui-cell {
+  padding: 0.4rem 0.3rem !important;
 }
 </style>

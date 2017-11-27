@@ -1,11 +1,11 @@
 <template>
-	<div class="jdtt_wrap">
-		<div class="jdtt_content jdtt_header">
+	<div class="JD_jdtt_wrap">
+		<div class="JD_jdtt_content JD_jdtt_header">
 			<x-header :left-options="{showBack:true,backText:''}">京典头条</x-header>
 		</div>
-		<div class="jdtt_content jdtt_main">
-			<div class="jdtt_main_tab">
-				<div class="header">
+		<div class="JD_jdtt_content JD_jdtt_main">
+			<div class="JD_jdtt_main_tab">
+				<div class="JD_header">
 					<!--<scroller lock-y :scrollbar-x=false>
 						<div class="box1">
 				        	<template v-for="(it,index) in tabs">
@@ -15,43 +15,37 @@
 							</template>
 				        </div>
 					</scroller>-->
-					<div class="f-hideScrollBar f-toh">
+					<div class="JD_f-hideScrollBar JD_f-toh">
 						<template v-for="(it,index) in tabs">
-							<div :class="['item',{active:isactive==index}]" @click="clicktabsFn(index)">
+							<div :class="['item',{active:isactive==index}]" :key="index" @click="clicktabsFn(index)">
 								{{it.name}}
 							</div>
 						</template>
 					</div>
 				</div>
 			</div>
-			<div class="jdtt_main_contains">
+			<div class="JD_jdtt_main_contains">
 				<pull-to :bottom-load-method="loadmore" @bottom-state-change="changebottomfn" :bottom-config="{pullText: '上拉加载',triggerText: '释放更新',loadingText: '加载中...',doneText: '加载完成',failText: '加载失败',loadedStayTime: 400,stayDistance: 50,triggerDistance: 70}" >
 					<div>
-						<div class="jdtt_main_contains_img">
+						<div class="JD_jdtt_main_contains_img">
 							<img src="../../../src/assets/img/login/jdtt_png.png"/>
 						</div>
-						<ul>
-							<template v-for="(item,index) in jdtt_contents">
-								<li>
-							<!--	<router-link  :to="{name:'Jdttxq',params:{id:item.id}}">-->
-									<dl>
-										<dt>
-											<img src="../../../src/assets/img/photo/02.jpg" style="width:2rem;height:2rem;"/>
-										</dt>
-										<dd>
-											<h4>{{item.title}}</h4>
-											<p>
-												{{item.description}}
-											</p>
-											<p>
-												{{item.publish}}
-											</p>
-										</dd>
-									</dl>
-								<!--</router-link>-->
-								</li>
-							</template>
-						</ul>
+						<template v-for="(item,index) in jdtt_contents">
+								<dl :key="index">
+									<dt>
+										<img src="../../../src/assets/img/photo/02.jpg" style="width:2rem;height:2rem;"/>
+									</dt>
+									<dd>
+										<h4>{{item.title}}</h4>
+										<p>
+											{{item.description}}
+										</p>
+										<p>
+											{{item.publish}}
+										</p>
+									</dd>
+								</dl>
+						</template>
 					</div>
 				</pull-to>
 			</div>
@@ -131,14 +125,14 @@ export default {
 
 <style lang="less">
 @import '../../stylesheet/reset.less';
-.jdtt_wrap{
+.JD_jdtt_wrap{
 	width:100%;
 	height:100%;
 	display:flex;
 	flex-direction:column;
 	
 }
-.jdtt_header{
+.JD_jdtt_header{
 	width:100%;
 	
 }
@@ -146,42 +140,42 @@ export default {
 	
 	background:#2a7dad !important;
 }
-.jdtt_wrap .vux-header .vux-header-title{
+.JD_jdtt_wrap .vux-header .vux-header-title{
 	font-family: 'PingFangSC-Light' !important;
 	font-size:.28rem !important;
 }
 /*主体*/
-div.jdtt_main{
+div.JD_jdtt_main{
 	height: calc(100% - 4rem);
 }
-div.jdtt_main_contains{
+div.JD_jdtt_main_contains{
 	height:95%;
 	
 }
-div.jdtt_main_contains ul{
+div.JD_jdtt_main_contains ul{
 	padding-left:.2rem;
 	margin-top:.2rem;
 }
-div.jdtt_main_contains ul li{
+div.JD_jdtt_main_contains ul li{
 	border-bottom:1px solid #bbbbbb;
 	padding:.3rem 0;
 }
-div.jdtt_main_contains ul li:not(:first-child){
+div.JD_jdtt_main_contains ul li:not(:first-child){
 	margin-top:.1rem;
 }
-div.jdtt_main_contains ul li dl{
+div.JD_jdtt_main_contains ul li dl{
 	display:flex;
 }
-div.jdtt_main_contains ul li dt{
+div.JD_jdtt_main_contains ul li dt{
 	width:2rem;
 	height:2rem;
 	display:flex;
 	align-items:center;
 }
-div.jdtt_main_contains ul li dt img{
+div.JD_jdtt_main_contains ul li dt img{
 	display:block;
 }
-div.jdtt_main_contains ul li dd{
+div.JD_jdtt_main_contains ul li dd{
 	display:flex;
 	flex-direction:column;
 	font-size:0.23rem;
@@ -189,16 +183,16 @@ div.jdtt_main_contains ul li dd{
 	margin-left:.2rem;
 	justify-content:space-between;
 }
-div.jdtt_main_contains ul li dd h4{
+div.JD_jdtt_main_contains ul li dd h4{
 	font-size:.3rem;
 	color:#414141;
 	
 }
-div.jdtt_main_contains_img{
+div.JD_jdtt_main_contains_img{
 	width:100%;
 	
 }
-div.jdtt_main_contains_img img{
+div.JD_jdtt_main_contains_img img{
 	width:100%;
 	
 }
@@ -234,12 +228,12 @@ header,div{
 .box1-item:first-child {
   margin-left: 0;
 }*/
-	.f-toh{
+	.JD_f-toh{
 		overflow: scroll;
 		white-space: nowrap;
 		-webkit-overflow-scrolling: touch;
 	}
-	.f-hideScrollBar{
+	.JD_f-hideScrollBar{
 		display: flex;
 		display: -webkit-flex;
 		box-sizing: content-box;
@@ -248,13 +242,13 @@ header,div{
 		overflow-y: hidden; 
 		padding-bottom: 15px;
 	}
-	.header{
+	.JD_header{
 		width: 100%;
 		height: 50px;
 		background-color: #fff;
 		overflow: hidden;
 	}
-	.header .item{
+	.JD_header .item{
 		flex-shrink: 0;
 		-webkit-flex-shrink: 0;
 		width: 25%;
@@ -265,8 +259,7 @@ header,div{
 		text-align: center;
 		text-transform: uppercase;
 	}
-	.header .item.active{
-	
+	.JD_header .item.active{
 		color: #414141;
 	}
 	/*.header .item:not(:last-child){
