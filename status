@@ -1,0 +1,103 @@
+[33mcommit 97750bb3be16940773c01ac352e1c00f3acbd9fe[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: LiShiChen <903317164@qq.com>
+Date:   Mon Nov 27 09:01:45 2017 +0800
+
+    修改了组件中的“团队组建、经典头条、知识培训、我的，下面的各个组件”
+
+[33mcommit 8a42afb68a5a7961be22819138bf5c4e799c3359[m
+Merge: 80789d9 bf906a1
+Author: LiShiChen <903317164@qq.com>
+Date:   Mon Nov 27 08:57:07 2017 +0800
+
+    Merge branch 'master' of github.com:SunOfHomeBoy/jdyx
+
+[33mcommit 80789d93e1897a9ff074d8bdacd95b1a7a7b492a[m
+Author: LiShiChen <903317164@qq.com>
+Date:   Mon Nov 27 08:56:36 2017 +0800
+
+    .
+
+[33mcommit bf906a1c97f69a6bd69792268508f076c2cf5222[m
+Author: rentinghuan <18201348175@163.com>
+Date:   Mon Nov 27 08:18:27 2017 +0800
+
+    修改首页搜索共享定位模块中的类名
+
+[33mcommit d373bb6c21848ce9725e2858bf7e8d5ae4d7568f[m
+Author: rentinghuan <18201348175@163.com>
+Date:   Sat Nov 25 11:22:25 2017 +0800
+
+    修改组件分类
+
+[33mcommit 908f211582b15b4d792e74d9a216be0be375d683[m
+Author: rentinghuan <18201348175@163.com>
+Date:   Fri Nov 24 17:41:41 2017 +0800
+
+    任婷焕：我我更新了src里面的模板
+
+[33mcommit 4351eec097bae6ca886f0c44b94e0b25256ad00e[m
+Author: rentinghuan <18201348175@163.com>
+Date:   Fri Nov 24 17:33:31 2017 +0800
+
+    asdfags
+
+[33mcommit 6eb924acff03e75d763b2167450eeb46ac8e9123[m
+Merge: ed4ef0f d64695f
+Author: LiShiChen <903317164@qq.com>
+Date:   Fri Nov 24 17:16:34 2017 +0800
+
+    Merge branch 'master' of github.com:SunOfHomeBoy/jdyx
+
+[33mcommit d64695f433f3e14ef88ca6f0eb3a2dc54d7cd5e5[m
+Author: LiShiChen <903317164@qq.com>
+Date:   Fri Nov 24 16:28:28 2017 +0800
+
+    .
+
+[33mcommit 4debd85062052a2bc4e2cf75f1772530f43ef27b[m
+Author: LiShiChen <903317164@qq.com>
+Date:   Fri Nov 24 16:22:37 2017 +0800
+
+    我修改了什么吗什么文件
+
+[33mcommit ed4ef0f8986ff2fa1b089a4ac32dcc0a24ad0a60[m
+Author: LiShiChen <903317164@qq.com>
+Date:   Fri Nov 24 16:14:32 2017 +0800
+
+    .
+
+[33mcommit 6f783f8831f123f5084e8201b9a289ad84ea6728[m
+Author: LiShiChen <903317164@qq.com>
+Date:   Fri Nov 24 15:35:01 2017 +0800
+
+    又加了一行
+
+[33mcommit 1bca02161060bc54c160a0ffe070d5e4cba55313[m
+Author: LiShiChen <903317164@qq.com>
+Date:   Fri Nov 24 14:19:45 2017 +0800
+
+    xiugei read me
+
+[33mcommit 0d32f3b567f2e25988ca29b879721e5d8b348371[m
+Author: LiShiChen <903317164@qq.com>
+Date:   Fri Nov 24 14:18:11 2017 +0800
+
+    。
+
+[33mcommit 973844e858faa19df6db855d21f744e0eeb4a8e8[m
+Author: LiShiChen <903317164@qq.com>
+Date:   Fri Nov 24 14:17:04 2017 +0800
+
+    readme.md
+
+[33mcommit 9a36532f9d9666fea741729cb5dda60190d07ee3[m
+Author: LiShiChen <903317164@qq.com>
+Date:   Fri Nov 24 14:15:37 2017 +0800
+
+    .
+
+[33mcommit 1e1fa168aa716df064429690d93e2ab212d1fd49[m
+Author: SunOfHomeBoy <903317164@qq.com>
+Date:   Thu Nov 23 17:50:07 2017 +0800
+
+    Initial commit
