@@ -1,16 +1,16 @@
 <template>
-	<div class="selectresume_wrap">
-		<div class="selectresume_content editresume_header">
+	<div class="JD_selectresume_wrap">
+		<div class="JD_selectresume_content JD_editresume_header">
 			<x-header :left-options="{backText: ''}">入职定位</x-header>
 		</div>
-		<div class="selectresume_content selectresume_main">
-			<div class="viewfulltimefile">
-				<div class="trans"></div>
-				<div class="smallbox">编辑全职档案</div>
+		<div class="JD_selectresume_content JD_selectresume_main">
+			<div class="JD_viewfulltimefile">
+				<div class="JD_trans"></div>
+				<div class="JD_smallbox">编辑全职档案</div>
 			</div>
-			<div class="viewparttimefile">
-				<div class="trans"></div>
-				<div class="smallbox">编辑兼职档案</div>
+			<div class="JD_viewparttimefile">
+				<div class="JD_trans"></div>
+				<div class="JD_smallbox">编辑兼职档案</div>
 			</div>
 		</div>	
   	</div>
@@ -42,37 +42,37 @@ export default {
 <style lang="less">
 @import '../../stylesheet/reset.less';
 
-.selectresume_wrap input::-webkit-input-placeholder{
+.JD_selectresume_wrap input::-webkit-input-placeholder{
 	color:#BEBEBE;
 	font-size:0.29rem;
 }
-.selectresume_wrap .vux-header{
+.JD_selectresume_wrap .vux-header{
 	background: #2A7DAD !important;
 }
-.selectresume_wrap{
+.JD_selectresume_wrap{
 	width:100%;
 	height:100%;
 	/*display:flex;
 	flex-direction:column;*/
 	
 }
-.selectresume_header{
+.JD_selectresume_header{
 	width:100%;
 	height:3.8rem;
 
 }
-div.selectresume_main{
+div.JD_selectresume_main{
 	display:flex;
 	flex-direction:column;
 }
 
-div.viewfulltimefile{
+div.JD_viewfulltimefile{
 	height:20rem;
 	background:url('http://i4.cfimg.com/611341/6342d711ae479079.png') no-repeat;
 	background-size: cover;
 	position:relative;
 }
-div.viewfulltimefile .trans{
+div.JD_viewfulltimefile .JD_trans{
 	width:100%;
 	height:100%;
 	position:absolute;
@@ -81,7 +81,7 @@ div.viewfulltimefile .trans{
 	opacity:0.3607843137254902;
 
 }
-div.viewfulltimefile .smallbox{
+div.JD_viewfulltimefile .JD_smallbox{
 	width:15rem;
 	height:4.5rem;
 	position:absolute;
@@ -96,13 +96,13 @@ div.viewfulltimefile .smallbox{
 	font-size:3rem;
 	color:#2A7DAD;
 }
-div.viewparttimefile{
+div.JD_viewparttimefile{
 	height:20rem;
 	background:url('http://i4.cfimg.com/611341/06330878c5c901f1.jpg') no-repeat;
 	background-size: cover;
 	position:relative;
 }
-div.viewparttimefile .trans{
+div.JD_viewparttimefile .JD_trans{
 	width:100%;
 	height:100%;
 	position:absolute;
@@ -111,7 +111,7 @@ div.viewparttimefile .trans{
 	opacity:0.3607843137254902;
 
 }
-div.viewparttimefile .smallbox{
+div.JD_viewparttimefile .JD_smallbox{
 	width:15rem;
 	height:4.5rem;
 	position:absolute;
