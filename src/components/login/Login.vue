@@ -6,7 +6,6 @@
 					<router-link to="/">
 						返回首页
 					</router-link>
-				
 				</span>
 			</x-header>
 		</div>
@@ -66,12 +65,22 @@
 			<toast v-model="showPositionValue" type="text" :time="800" is-show-mask position="middle" width="2rem">{{toasttitle}}</toast>
 		</div>	
   	</div>
-  	
 </template>
 
 <script>
-import { XHeader, GroupTitle, XButton, Divider, Grid, GridItem, Group, Cell, XInput, Toast } from 'vux'
-import {api} from '../../utils'
+import {
+  XHeader,
+  GroupTitle,
+  XButton,
+  Divider,
+  Grid,
+  GridItem,
+  Group,
+  Cell,
+  XInput,
+  Toast
+} from "vux";
+import { api } from "../../utils";
 export default {
   components: {
     GroupTitle,
@@ -85,161 +94,158 @@ export default {
     XInput,
     Toast
   },
-  data () {
+  data() {
     return {
-    	index: 0,
-    	params:{
-    		phone:'',
-    		pwd:''
-    	},
-    	obj:{'name':"rth"},
-    	toasttitle:"此处不能为空",
-    	showPositionValue:false
-    }
+      index: 0,
+      params: {
+        phone: "",
+        pwd: ""
+      },
+      obj: { name: "rth" },
+      toasttitle: "此处不能为空",
+      showPositionValue: false
+    };
   },
   methods: {
-  	onItemClick (index) {
-  		console.log(index);
-  		
-  	},
-  	loginbtnfn () {
-  		if(this.params.phone==""){
-  			this.showPositionValue=true;
-  			this.toasttitle="手机号码不能为空";
-  			return;
-  		}
-  		if(this.params.pwd==""){
-  			this.showPositionValue=true;
-  			this.toasttitle="密码不能为空";
-  			return;
-  		}
-  		
-  		api('/service/signin', {}, callback => {
-	  		var result=callback.data.result;
-	  		if(result){
-	  			this.$router.push({path:"/"});
-	  		}
-		})
-  		/*if(this.params.phone==""){
+    onItemClick(index) {
+      console.log(index);
+    },
+    loginbtnfn() {
+      if (this.params.phone == "") {
+        this.showPositionValue = true;
+        this.toasttitle = "手机号码不能为空";
+        return;
+      }
+      if (this.params.pwd == "") {
+        this.showPositionValue = true;
+        this.toasttitle = "密码不能为空";
+        return;
+      }
+
+      api("/service/signin", {}, callback => {
+        var result = callback.data.result;
+        if (result) {
+          this.$router.push({ path: "/" });
+        }
+      });
+      /*if(this.params.phone==""){
   			return;
   		}
   		if(this.params.pwd==""){
   			return;
   		}
   		console.log(this.$router)*/
-  		/*this.$router.back(-1);*/
-  	}
+      /*this.$router.back(-1);*/
+    }
   }
-}
+};
 </script>
 
 <style lang="less">
-@import '../../stylesheet/reset.less';
-.login_wrap input::-webkit-input-placeholder{
-	color:#BEBEBE;
-	font-size:0.29rem;
+@import "../../stylesheet/reset.less";
+.login_wrap input::-webkit-input-placeholder {
+  color: #bebebe;
+  font-size: 0.29rem;
 }
-.login_wrap .weui-cell{
+.login_wrap .weui-cell {
+}
+.login_wrap .weui-cells {
+  margin: 0 !important;
+}
+.login_wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.login_header {
+  width: 100%;
+  height: 4rem;
+  background: url("http://i4.cfimg.com/611341/6342d711ae479079.png") no-repeat;
+  background-size: cover;
+  position: relative;
+}
+.login_wrap .vux-header {
+  background: none !important;
+}
+.login_wrap .vux-header .vux-header-back {
+  color: #000 !important;
+}
+.login_wrap .vux-header .vux-header-left .left-arrow:before {
+  border-color: #414141 !important;
+}
+div.smallheader {
+  position: absolute;
+  left: 2%;
+  top: 10%;
+  display: flex;
+  align-items: center;
+}
+.login_main {
+  padding: 0 0.2rem 0 0.2rem;
+}
+ul.login_option {
+  margin-top: 0.64rem;
+}
+ul.login_option input {
+  border: none;
+  outline: 0;
+  padding-left: 0.67rem;
+}
+ul.login_option li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1px solid #c6c6c6;
+}
+ul.login_option li span {
+  display: block;
+  width: 1.31rem;
+  height: 0.93rem;
+}
+ul.login_option li:nth-child(2) {
+  padding-top: 0.58rem;
+}
+div.set_option {
+  width: 90%;
+  margin: auto;
 
+  display: flex;
+  justify-content: space-between;
+  color: #bebebe;
+  font-size: 0.23rem;
+  height: 0.87rem;
+  line-height: 0.87rem;
 }
-.login_wrap .weui-cells{
-	margin:0 !important;
+div.set_option a {
+  color: #bebebe;
 }
-.login_wrap{
-	width:100%;
-	height:100%;
-	display:flex;
-	flex-direction:column;
-	
+div.set_option span {
+  display: block;
 }
-.login_header{
-	width:100%;
-	height:4rem;
-	background:url('http://i4.cfimg.com/611341/6342d711ae479079.png') no-repeat;
-	background-size:cover;
-	position:relative;
+.login_wrap .weui-btn_primary {
+  background-color: #2a7dad !important;
 }
-.login_wrap .vux-header{
-	background:none  !important;
-}
-.login_wrap .vux-header .vux-header-back{
-	color:#000 !important;
-}
-.login_wrap .vux-header .vux-header-left .left-arrow:before{
-	border-color:#414141 !important;
-}
-div.smallheader{
-	position:absolute;
-	left:2%;
-	top:10%;
-	display:flex;
-	align-items:center;
-}
-.login_main{
-	padding:0 .2rem 0 .2rem;
-}
-ul.login_option{
-	margin-top:0.64rem;
-}
-ul.login_option input{
-	border:none;
-	outline: 0;
-	padding-left:0.67rem;
-}
-ul.login_option li{
-	display:flex;
-	flex-direction:row;
-	align-items:center;
-	border-bottom:1px solid #C6C6C6;
-}
-ul.login_option li span{
-	display:block;
-	width:1.31rem;
-	height:0.93rem;
-}
-ul.login_option li:nth-child(2){
-	padding-top:0.58rem;
-}
-div.set_option{
-	width:90%;
-	margin:auto;
-	
-	display:flex;
-	justify-content:space-between;
-	color:#BEBEBE;
-	font-size:0.23rem;
-	height:0.87rem;
-	line-height:0.87rem;
-}
-div.set_option a{
-	color:#BEBEBE;
-}
-div.set_option span{
-	display:block;
-}
-.login_wrap .weui-btn_primary{
-	background-color: #2A7DAD !important;
-}
-div.showshejiao{
-	width:85%;
-	margin:auto;
-	margin-top:2rem;
-	font-size:.23rem;
+div.showshejiao {
+  width: 85%;
+  margin: auto;
+  margin-top: 2rem;
+  font-size: 0.23rem;
 }
 
-div.login_bottomthreelogo{
-	display:flex;
-	justify-content:center;
-	align-items:center;
+div.login_bottomthreelogo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.login_wrap .weui-input{
-	font-size: .23rem !important;
+.login_wrap .weui-input {
+  font-size: 0.23rem !important;
 }
-.login_wrap span.backhome a{
-	padding-left:.4rem;
-	color:#414141 !important;
+.login_wrap span.backhome a {
+  padding-left: 0.4rem;
+  color: #414141 !important;
 }
-.login_wrap .weui-cell{
-	padding:.6rem .2rem;
+.login_wrap .weui-cell {
+  padding: 0.6rem 0.2rem;
 }
 </style>

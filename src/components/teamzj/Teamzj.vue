@@ -152,13 +152,12 @@ export default {
         remark: ""
       },
       title: "京典一线团队组建",
-      description:
-        "京典一线全球人的平台，庞大的服务团队，为您提供全球最好的服务。京典一线全球人的平台，庞大的服务团队，为您提供全球最好的服务。京典一线全球人的平台，庞大的服务团队，为您提供全球最好的服务。京典一线全球人的平台",
+      description: "京典一线全球人的平台，庞大的服务团队，为您提供全球最好的服务。京典一线全球人的平台，庞大的服务团队，为您提供全球最好的服务。京典一线全球人的平台，庞大的服务团队，为您提供全球最好的服务。京典一线全球人的平台",
       JD_teamzj_main_01: require("../../../src/assets/img/login/zspx.png"),
       JD_teamzj_main_02: require("../../../src/assets/img/login/tdzj1.png"),
       JD_teamzj_main_03: require("../../../src/assets/img/login/tdzj2.png"),
       toasttitle: "",
-      showPositionValue: true,
+      showPositionValue: false,
       validname: {
         name: "单位名称",
         peoplenum: "需求人数",

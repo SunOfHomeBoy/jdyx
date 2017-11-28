@@ -12,58 +12,58 @@ import redirect from './redirect'
 import setting from '../config/setting'
 
 export default function api(uri, parameters, callback) {
-        axios({
-                url: setting.pathAPI + uri,
-                method: 'post',
-                data: {
-                        accessToken: auth().accessToken || '',
-                        appID: setting.appID,
-                        parameters: json(parameters),
-                        timezone: (window.jdyxData || {}).timezone || '8.0'
-                },
-                transformRequest: [function (data) {
-                        let buf = ''
-                        for (let it in data) {
-                                buf += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-                        }
-                        return buf
-                }],
-                headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                }
-        }).then(response => {
-                let responseData = response.data
+	axios({
+		url: setting.pathAPI + uri,
+		method: 'post',
+		data: {
+			accessToken: auth().accessToken || '',
+			appID: setting.appID,
+			parameters: json(parameters),
+			timezone: (window.jdyxData || {}).timezone || '8.0'
+		},
+		transformRequest: [function (data) {
+			let buf = ''
+			for (let it in data) {
+				buf += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+			}
+			return buf
+		}],
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		}
+	}).then(response => {
+		let responseData = response.data
 
-                if (typeof (response) === 'string') {
-                        responseData = json(response)
-                }
+		if (typeof (response) === 'string') {
+			responseData = json(response)
+		}
 
 
-                switch (responseData.code) {
-                        case 404:
-                                if (setting.debug) {
-                                        console.log('API Not Found')
-                                }
-                                break
+		switch (responseData.code) {
+			case 404:
+				if (setting.debug) {
+					console.log('API Not Found')
+				}
+				break
 
-                        case 403:
-                                return redirect(setting.pathSignin)
+			case 403:
+				return redirect(setting.pathSignin)
 
-                        case 500:
-                                if (setting.debug) {
-                                        console.log('Internal Server Error: ' + responseData.msg)
-                                }
-                                alert('Internal Server Error')
+			case 500:
+				if (setting.debug) {
+					console.log('Internal Server Error: ' + responseData.msg)
+				}
+				alert('Internal Server Error')
 
-                        case 200:
-                                return callback(responseData)
+			case 200:
+				return callback(responseData)
 
-                        default:
-                                if (setting.debug) {
-                                        console.log(responseData.code + ': ' + responseData.msg)
-                                }
-                }
-        }).catch(err => {
-                alert('Network Connection Errors')
-        })
+			default:
+				if (setting.debug) {
+					console.log(responseData.code + ': ' + responseData.msg)
+				}
+		}
+	}).catch(err => {
+		alert('Network Connection Errors')
+	})
 }
