@@ -1,21 +1,13 @@
 <template>
 	<div class="JD_jdtt_wrap">
 		<div class="JD_jdtt_content JD_jdtt_header">
-			<x-header :left-options="{showBack:true,backText:''}">京典头条</x-header>
+			<x-header :left-options="{showBack:true,backText:''}">{{title}}</x-header>
 		</div>
 		<div class="JD_jdtt_content JD_jdtt_main">
 			<div class="JD_jdtt_main_tab">
 				<div class="JD_header">
-					<!--<scroller lock-y :scrollbar-x=false>
-						<div class="box1">
-				        	<template v-for="(it,index) in tabs">
-								<div :class="['box1-item',{active:isactive==index}]" @click="clicktabsFn(index)">
-									{{it.name}}
-								</div>
-							</template>
-				        </div>
-					</scroller>-->
 					<div class="JD_f-hideScrollBar JD_f-toh">
+            <!-- 新闻title -->
 						<template v-for="(it,index) in tabs">
 							<div :class="['item',{active:isactive==index}]" :key="index" @click="clicktabsFn(index)">
 								{{it.name}}
@@ -28,25 +20,43 @@
 				<pull-to :bottom-load-method="loadmore" @bottom-state-change="changebottomfn" :bottom-config="{pullText: '上拉加载',triggerText: '释放更新',loadingText: '加载中...',doneText: '加载完成',failText: '加载失败',loadedStayTime: 400,stayDistance: 50,triggerDistance: 70}" >
 					<div>
 						<div class="JD_jdtt_main_contains_img">
-							<img src="../../../src/assets/img/login/jdtt_png.png"/>
+              <!-- 此处banner存疑，可以动态加载 -->
+							<img :src="jdttBanner"/>
 						</div>
 						<ul>
-							<li>
-								<template v-for="(item,index) in jdtt_contents">
-									<dl :key="index">
-										<dt>
-											<img src="../../../src/assets/img/photo/02.jpg" style="width:2rem;height:2rem;"/>
-										</dt>
-										<dd>
-											<h4>{{item.title}}</h4>
-											<p>{{item.description}}</p>
-											<p>{{item.publish}}</p>
-										</dd>
-									</dl>
-								</template>
-							</li>
+<!-- 
+<template v-if="articles.length === 0">
+      <p class="nocontent"><b>{{tags}}</b> 没有内容</p>
+    </template>
+    <template v-else>
+      <li v-for="(item,ind) in articles" :key="ind" class="item">
+        <ItemColumns :article="item"></ItemColumns>
+      </li>
+    </template> -->
+
+              
+              <template v-if="jdtt_contents === 0">
+                <p class="nocontent"><b>{{tags}}</b>没有内容</p>
+              </template>
+              <template v-else>
+                <li v-for="(item,index) in jdtt_contents" :key="index">
+                  <!-- 路由挂载 -->
+                  <router-link :to="`${componentName}/${item.articleID}`">
+                    <dl>
+                      <dt>
+                        <!-- 图片的src必须动态请求 -->
+                        <img :src="item.thumb" />  
+                      </dt>
+                      <dd>
+                        <h4>{{item.title}}</h4>
+                        <p class="des">{{item.description}}</p>
+                        <p>{{item.publish}}</p>
+                      </dd>
+                    </dl>
+                  </router-link>
+                </li>
+              </template>
 						</ul>
-						
 					</div>
 				</pull-to>
 			</div>
@@ -59,16 +69,24 @@
 import { XHeader, Scroller } from "vux";
 import { api } from "../../utils";
 import PullTo from "vue-pull-to";
+import jdyxBaner from "../../../src/assets/img/login/jdtt_png.png";
 export default {
   components: {
     XHeader,
     Scroller,
     PullTo
   },
+  watch: {
+    $router: function(to,from) {
+     console.log(to,from);
+      
+    }
+  },
   created() {
     /*var bb=document.getElementsByClassName('weui_tab_bd')[0];
   	bb.style.paddingBottom=0;
-  	bb.style.overflow='hidden';*/
+    bb.style.overflow='hidden';*/
+    this.consoleRouter();
     var o = {
       articleType: "knowledge",
       articleLang: "cn",
@@ -85,6 +103,7 @@ export default {
     return {
       index: 0,
       isactive: 0,
+      title: "",
       tabs: [
         { name: "京典头条" },
         { name: "京典新闻" },
@@ -92,11 +111,20 @@ export default {
         { name: "京典公益" },
         { name: "京典公益" }
       ],
+      componentName:'',
+      jdttBanner: jdyxBaner,
+      itemSrc: require("../../../src/assets/img/photo/02.jpg"),
       jdtt_contents: [],
       pageparam: { index: 1, limit: 10 }
     };
   },
+  computed: {},
   methods: {
+    consoleRouter(){
+      console.log(this.$router.history.current.path);
+      let curPath=this.$router.history.current.path;
+      this.componentName = curPath;
+    },
     clicktabsFn(index) {
       this.isactive = index;
       var pinjie = index + 1;
@@ -173,39 +201,68 @@ div.JD_jdtt_main_contains {
   height: 95%;
 }
 div.JD_jdtt_main_contains ul {
-  padding-left: 0.2rem;
-  margin-top: 0.2rem;
+  padding-left: 0.24rem;
 }
 div.JD_jdtt_main_contains ul li {
   border-bottom: 1px solid #bbbbbb;
-  padding: 0.3rem 0;
+  padding: 0.2rem 0;
 }
 div.JD_jdtt_main_contains ul li:not(:first-child) {
   margin-top: 0.1rem;
 }
 div.JD_jdtt_main_contains ul li dl {
   display: flex;
+  margin-bottom: 0.1rem;
 }
 div.JD_jdtt_main_contains ul li dt {
-  width: 2rem;
-  height: 2rem;
+  // width: 2rem;
+  // height: 2rem;
+  width: 1.76rem;
+  height: 1.6rem;
   display: flex;
   align-items: center;
 }
 div.JD_jdtt_main_contains ul li dt img {
   display: block;
+  width: 100%;
+  height: 100%;
 }
 div.JD_jdtt_main_contains ul li dd {
-  display: flex;
+  display: block;
   flex-direction: column;
-  font-size: 0.23rem;
   color: #bbbbbb;
-  margin-left: 0.2rem;
+  margin-left: 0.25rem;
   justify-content: space-between;
 }
 div.JD_jdtt_main_contains ul li dd h4 {
+  width: 4.52rem;
+  height: 0.5rem;
+  overflow: hidden;
   font-size: 0.3rem;
+  font-weight: 500;
   color: #414141;
+  line-height: 0.5rem;
+  white-space: nowrap;
+  word-break: keep-all;
+}
+div.JD_jdtt_main_contains ul li dd .des {
+  // text-overflow: -o-ellipsis-lastline; // 兼容Opera写法
+  overflow: hidden;
+  width: 4.24rem;
+  height: 0.64rem;
+  font-size: 0.24rem;
+  line-height: 0.32rem;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+div.JD_jdtt_main_contains ul li dd p:nth-of-type(2) {
+  // -webkit-text-size-adjust:none !import;
+  margin-top: 0.1rem;
+  font-size: 0.16rem;
+  -webkit-transform: scale(0.75);
+  float: left;
 }
 div.JD_jdtt_main_contains_img {
   width: 100%;

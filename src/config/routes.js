@@ -166,9 +166,13 @@ export default [{
 	}, {
 		path: '/Jdtt',
 		component: Jdtt
-	}, {
+	},{
+		path: '/Jdtt/:id',
+		name: 'Zspxxq',
+		component: Zspxxq
+	},{
 		path: '/Zspx',
-		component: Zspx
+		component: Jdtt
 	}, {
 		path: '/Zspxxq/:id',
 		name: 'Zspxxq',
