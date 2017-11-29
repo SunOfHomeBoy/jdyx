@@ -163,8 +163,9 @@ export default [{
 				component: Zjrecord
 			}
 		]
-	}, {
+	},{
 		path: '/Jdtt',
+		name: 'Jdtt',
 		component: Jdtt
 	},{
 		path: '/Jdtt/:id',
