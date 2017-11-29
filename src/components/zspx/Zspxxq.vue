@@ -120,32 +120,34 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
-  font-size: 1.3rem;
 }
 .JD_zspxxq_header {
   width: 100%;
 }
 .JD_zspxxq_wrap .vux-header {
-  font-size: 0.28rem !important;
   background: #2a7dad !important;
 }
-
+.JD_zspxxq_wrap .vux-header-title {
+  font-size: 0.28rem;
+}
 /*主体*/
 div.JD_zspxxq_main {
   overflow: auto;
-  padding: 0 1rem;
+  padding: 0 .24rem;
 }
 div.JD_zspxxq_main .title {
-  font-size: 1.2rem;
+  margin: 0.36rem 0 0.24rem;
+  font-size: 0.36rem;
   color: #2a7dad;
 }
 div.JD_zspxxq_main .time {
+  margin-bottom: 0.18rem;
   color: #8d8d8d;
-  font-size: 0.8rem;
+  font-size: 0.24rem;
 }
 div.JD_zspxxq_main .direction {
-  font-size: 0.8rem;
+  font-size: 0.3rem;
   color: #414141;
-  text-indent: 2rem;
+  text-indent: 0.6rem;
 }
 </style>
