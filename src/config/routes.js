@@ -23,7 +23,7 @@ const Zjrecord = resolve => require(['../components/teamzj/Zjrecord'], resolve) 
 //京典头条
 const Jdtt = resolve => require(['../components/jingdtt/Jdtt'], resolve)
 //知识培训
-const Zspx = resolve => require(['../components/zspx/Zspx'], resolve)
+// const Zspx = resolve => require(['../components/zspx/Zspx'], resolve) // 删除的组件
 const Zspxxq = resolve => require(['../components/zspx/Zspxxq'], resolve)
 //我的
 const Myself = resolve => require(['../components/myself/Myself'], resolve)
@@ -174,7 +174,7 @@ export default [{
 		path: '/Zspx',
 		component: Jdtt
 	}, {
-		path: '/Zspxxq/:id',
+		path: '/Zspx/:id',
 		name: 'Zspxxq',
 		component: Zspxxq
 	}, {

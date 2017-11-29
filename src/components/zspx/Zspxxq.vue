@@ -1,7 +1,7 @@
 <template>
 	<div class="JD_zspxxq_wrap">
 		<div class="JD_zspx_content JD_zspx_header">
-			<x-header :left-options="{showBack:true,backText: ''}">知识培训</x-header>
+			<x-header :left-options="{showBack:true,backText: ''}">{{titleName}}</x-header>
 		</div>
 		<div class="JD_zspxxq_content JD_zspxxq_main">
 			<div class="title">
@@ -60,6 +60,8 @@ export default {
   },
   data() {
     return {
+      curUrl: "",
+      titleName: "",
       index: 0,
       isactive: 0,
       title: "俞永福:我们正在经历数据觉醒的时代",
@@ -77,7 +79,31 @@ export default {
       ]
     };
   },
+  created() {
+    this.consoleRouter(); // 检索当前路由并赋值
+    // this.redirection(); // 路由重定向
+    this.routerReg();
+  },
   methods: {
+    // 打印当前路由 并赋值
+    consoleRouter() {
+      console.log(this.$router);
+      let curPath = this.$router.history.current.path;
+      this.curUrl = curPath;
+    },
+    // 判断路由 并根据路由加载不同数据
+    routerReg() {
+      let jdttReg = /Jdtt/;
+      let zspxReg = /Zspx/;
+      let str = this.curUrl;
+      if (jdttReg.test(str)) {
+        this.titleName = "经典头条";
+      } else if (zspxReg.test(str)) {
+        this.titleName = "知识培训";
+      } else {
+        console.log("我没有识别到路由。。。");
+      }
+    },
     clicktabsFn(index) {
       console.log(index, event);
       const $ele = event.srcElement || event.target;
@@ -100,11 +126,13 @@ export default {
   width: 100%;
 }
 .JD_zspxxq_wrap .vux-header {
+  font-size: 0.28rem !important;
   background: #2a7dad !important;
 }
 
 /*主体*/
 div.JD_zspxxq_main {
+  overflow: auto;
   padding: 0 1rem;
 }
 div.JD_zspxxq_main .title {

@@ -1,9 +1,12 @@
 <template>
 	<div class="JD_jdtt_wrap">
+    <!-- 头部标题栏 -->
 		<div class="JD_jdtt_content JD_jdtt_header">
 			<x-header :left-options="{showBack:true,backText:''}">{{title}}</x-header>
 		</div>
+    <!-- 内容区 -->
 		<div class="JD_jdtt_content JD_jdtt_main">
+      <!-- 新闻导航栏 -->
 			<div class="JD_jdtt_main_tab">
 				<div class="JD_header">
 					<div class="JD_f-hideScrollBar JD_f-toh">
@@ -16,27 +19,19 @@
 					</div>
 				</div>
 			</div>
+      <!-- 新闻card -->
 			<div class="JD_jdtt_main_contains">
 				<pull-to :bottom-load-method="loadmore" @bottom-state-change="changebottomfn" :bottom-config="{pullText: '上拉加载',triggerText: '释放更新',loadingText: '加载中...',doneText: '加载完成',failText: '加载失败',loadedStayTime: 400,stayDistance: 50,triggerDistance: 70}" >
 					<div>
+            <!-- banner图 -->
 						<div class="JD_jdtt_main_contains_img">
               <!-- 此处banner存疑，可以动态加载 -->
 							<img :src="jdttBanner"/>
 						</div>
+            <!-- 新闻list -->
 						<ul>
-<!-- 
-<template v-if="articles.length === 0">
-      <p class="nocontent"><b>{{tags}}</b> 没有内容</p>
-    </template>
-    <template v-else>
-      <li v-for="(item,ind) in articles" :key="ind" class="item">
-        <ItemColumns :article="item"></ItemColumns>
-      </li>
-    </template> -->
-
-              
-              <template v-if="jdtt_contents === 0">
-                <p class="nocontent"><b>{{tags}}</b>没有内容</p>
+              <template v-if="jdtt_contents == 0">
+                <p class="nocontent"><b>{{tags}}</b>没有加载到数据</p>
               </template>
               <template v-else>
                 <li v-for="(item,index) in jdtt_contents" :key="index">
@@ -44,7 +39,7 @@
                   <router-link :to="`${componentName}/${item.articleID}`">
                     <dl>
                       <dt>
-                        <!-- 图片的src必须动态请求 -->
+                        <!-- 图片的src必须动态请求 card左侧小图-->
                         <img :src="item.thumb" />  
                       </dt>
                       <dd>
@@ -61,8 +56,7 @@
 				</pull-to>
 			</div>
 		</div>
-  	</div>
-  	
+  </div>
 </template>
 
 <script>
@@ -77,41 +71,66 @@ export default {
     PullTo
   },
   watch: {
-    $router: function(to,from) {
-     console.log(to,from);
-      
+    $router: function(to, from) {
+      console.log(to, from);
     }
   },
   created() {
-    /*var bb=document.getElementsByClassName('weui_tab_bd')[0];
-  	bb.style.paddingBottom=0;
-    bb.style.overflow='hidden';*/
-    this.consoleRouter();
-    var o = {
-      articleType: "knowledge",
-      articleLang: "cn",
-      begin: this.pageparam.index,
-      limit: this.pageparam.limit
-    };
-    api("/article/listNews", o, callback => {
-      var zspxdata = callback.data.items;
-      this.jdtt_contents = zspxdata;
-      console.log(zspxdata);
-    });
+    this.consoleRouter(); // 检索当前路由并赋值
+    // this.redirection(); // 路由重定向
+    // 判断路由 并根据路由加载不同数据
+    if (this.componentName === "/Jdtt") {
+      console.log("我是jdtt");
+      this.title = "经典头条";
+      this.tabs = [
+        { name: "京典头条" },
+        { name: "京典新闻" },
+        { name: "京典国际" },
+        { name: "京典公益" },
+        { name: "京典公益" }
+      ];
+      var o = {
+        articleType: "knowledge",
+        articleLang: "cn",
+        begin: this.pageparam.index,
+        limit: this.pageparam.limit
+      }; //创建实例，请求数据
+      api("/article/listNews", o, callback => {
+        var zspxdata = callback.data.items;
+        this.jdtt_contents = zspxdata;
+        console.log(zspxdata);
+      });
+    } else if (this.componentName === "/Zspx") {
+      console.log("我是zspx");
+      this.title = "知识培训";
+      this.tabs = [
+        { name: "职场建议" },
+        { name: "考试认证" },
+        { name: "互联网" },
+        { name: "兴趣特征" },
+        { name: "兴趣爱好" }
+      ]
+      var o = {
+        articleType: "knowledge",
+        articleLang: "cn",
+        begin: this.pageparam.index,
+        limit: this.pageparam.limit
+      };
+      api("/article/listKnowledge", o, callback => {
+        var zspxdata = callback.data.items;
+        this.jdtt_contents = zspxdata;
+      });
+    } else {
+      console.log("我没有识别到路由。。。");
+    }
   },
   data() {
     return {
       index: 0,
       isactive: 0,
       title: "",
-      tabs: [
-        { name: "京典头条" },
-        { name: "京典新闻" },
-        { name: "京典国际" },
-        { name: "京典公益" },
-        { name: "京典公益" }
-      ],
-      componentName:'',
+      tabs: [],
+      componentName: "",
       jdttBanner: jdyxBaner,
       itemSrc: require("../../../src/assets/img/photo/02.jpg"),
       jdtt_contents: [],
@@ -120,27 +139,58 @@ export default {
   },
   computed: {},
   methods: {
-    consoleRouter(){
+    consoleRouter() {
+      // 打印当前路由 并赋值
       console.log(this.$router.history.current.path);
-      let curPath=this.$router.history.current.path;
+      let curPath = this.$router.history.current.path;
       this.componentName = curPath;
     },
+    // redirection() {
+    //   // 路由重定向
+    //   if (this.componentName === "/Jdtt") {
+    //     console.log("我是jdtt");
+    //   } else if (this.componentName === "/Zspx") {
+    //     console.log("我是zspx");
+    //   } else {
+    //     console.log("我没有识别到路由。。。");
+    //   }
+    // },
     clicktabsFn(index) {
+      //点击每个tab的时候 切换绑定的class
       this.isactive = index;
-      var pinjie = index + 1;
-      var knowstr = "news#0" + pinjie;
-      var o = {
-        articleType: knowstr,
-        articleLang: "cn",
-        begin: 1,
-        limit: this.pageparam.limit
-      };
-      //切换请求
-      api("/article/listNews", o, callback => {
-        var zspxdata = callback.data.items;
-        this.jdtt_contents = zspxdata;
-        console.log(zspxdata);
-      });
+      let pinjie = index + 1;
+      if (this.componentName === "/Jdtt") {
+        console.log("我是jdtt 新闻列表的请求");
+        let knowstr = "news#0" + pinjie;
+        let o = {
+          articleType: knowstr,
+          articleLang: "cn",
+          begin: 1,
+          limit: this.pageparam.limit
+        };
+        //切换请求
+        api("/article/listNews", o, callback => {
+          var zspxdata = callback.data.items;
+          this.jdtt_contents = zspxdata;
+          console.log(zspxdata);
+        });
+      } else if (this.componentName === "/Zspx") {
+        console.log("我是zspx 新闻列表的请求");
+        let knowstr = "knowledge#0" + pinjie;
+        let o = {
+          articleType: knowstr,
+          articleLang: "cn",
+          begin: 1,
+          limit: this.pageparam.limit
+        };
+        //切换请求
+        api("/article/listKnowledge", o, callback => {
+          var zspxdata = callback.data.items;
+          this.jdtt_contents = zspxdata;
+        });
+      } else {
+        console.log("我没有识别到新闻列表的请求。。。");
+      }
     },
     loadmore(loaded) {
       //底部上拉时执行的方法
@@ -202,6 +252,9 @@ div.JD_jdtt_main_contains {
 }
 div.JD_jdtt_main_contains ul {
   padding-left: 0.24rem;
+}
+div.JD_jdtt_main_contains .nocontent {
+  font-size: 0.24rem;
 }
 div.JD_jdtt_main_contains ul li {
   border-bottom: 1px solid #bbbbbb;
