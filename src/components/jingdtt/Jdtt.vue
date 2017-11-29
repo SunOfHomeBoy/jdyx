@@ -139,24 +139,24 @@ export default {
   },
   computed: {},
   methods: {
+    // 打印当前路由 并赋值
     consoleRouter() {
-      // 打印当前路由 并赋值
       console.log(this.$router.history.current.path);
       let curPath = this.$router.history.current.path;
       this.componentName = curPath;
     },
     // redirection() {
-    //   // 路由重定向
-    //   if (this.componentName === "/Jdtt") {
-    //     console.log("我是jdtt");
-    //   } else if (this.componentName === "/Zspx") {
-    //     console.log("我是zspx");
-    //   } else {
-    //     console.log("我没有识别到路由。。。");
-    //   }
-    // },
+      //   // 路由重定向
+      //   if (this.componentName === "/Jdtt") {
+      //     console.log("我是jdtt");
+      //   } else if (this.componentName === "/Zspx") {
+      //     console.log("我是zspx");
+      //   } else {
+      //     console.log("我没有识别到路由。。。");
+      //   }
+      // },
+    //点击每个tab的时候 切换绑定的class
     clicktabsFn(index) {
-      //点击每个tab的时候 切换绑定的class
       this.isactive = index;
       let pinjie = index + 1;
       if (this.componentName === "/Jdtt") {

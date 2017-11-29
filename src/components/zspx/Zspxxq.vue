@@ -4,21 +4,14 @@
 			<x-header :left-options="{showBack:true,backText: ''}">{{titleName}}</x-header>
 		</div>
 		<div class="JD_zspxxq_content JD_zspxxq_main">
-			<div class="title">
-				{{title}}
-			</div>
-			<div class="time">
-				{{time}}
-			</div>
-			<div class="picture">
-				<img src="../../../src/assets/img/login/jdtt_png.png" style="width:100%;"/>
-			</div>
+			<div class="title">{{title}}</div>
+			<div class="time">{{time}}</div>
+			<div class="picture"><img :src="cardSrc" style="width:100%;"/></div>
 			<div class="direction">
 				{{description}}
 			</div>
 		</div>
-  	</div>
-  	
+  </div>	
 </template>
 
 <script>
@@ -39,6 +32,7 @@ import {
   Swiper,
   SwiperItem
 } from "vux";
+import { api } from "../../utils";
 
 export default {
   components: {
@@ -68,6 +62,7 @@ export default {
       description:
         "文字描述文字描述文字描述文字描述文字描述 文字描述文字描述文字描述文字描述文字描述文字 描述文字描述文字描述文字描述文字描述文字描述 文字描述文字描述文字描述文字描述。文字描述文 字描述。 文字描述文字描述文字描述文字描述文字描述 文字描述文字描述文字描述文字描述文字描述文字 描述文字描述文字。",
       time: "2017.2.12",
+      cardSrc: require("../../../src/assets/img/login/jdtt_png.png"),
       tabs: [
         { name: "职场认证" },
         { name: "考试认证" },
@@ -83,6 +78,7 @@ export default {
     this.consoleRouter(); // 检索当前路由并赋值
     // this.redirection(); // 路由重定向
     this.routerReg();
+    this.getArticle();
   },
   methods: {
     // 打印当前路由 并赋值
@@ -103,6 +99,20 @@ export default {
       } else {
         console.log("我没有识别到路由。。。");
       }
+    },
+    // 获取文章data
+    getArticle() {
+      let artId = this.$router.history.current.params.id;
+      let o = {
+        articleID: artId,
+        articleLang: "cn"
+      };
+      console.log(o);
+      api("/article/listNews", o, callback => {
+        // do something
+        var zspxdata = callback.data.items;
+        this.jdtt_contents = zspxdata;
+      });
     },
     clicktabsFn(index) {
       console.log(index, event);
@@ -133,7 +143,7 @@ export default {
 /*主体*/
 div.JD_zspxxq_main {
   overflow: auto;
-  padding: 0 .24rem;
+  padding: 0 0.24rem;
 }
 div.JD_zspxxq_main .title {
   margin: 0.36rem 0 0.24rem;
